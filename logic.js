@@ -1,80 +1,115 @@
-const actionButton = document.querySelector('.action_btn');
-
-//CLOSING AND OPENING MODAL TO CREATE A NEW LIST OF TASKS
-const modalCreateList = () => {
-	const modalCreateList = document.querySelector('.modal');
-	const closeModalButton = document.querySelector('.close');
-
-	actionButton.addEventListener('click', () => {
-		modalCreateList.style.display = 'block';
+// CLOSING AND OPENING MODAL TO CREATE A NEW LIST OF TASKS
+const modal = (openBtn, modal, closeBtn) => {
+	openBtn.addEventListener('click', () => {
+		modal.style.display = 'block';
 	});
 
 	window.addEventListener('click', () => {
-		if (event.target == modalCreateList) {
-			modalCreateList.style.display = 'none';
+		if (event.target == modal) {
+			modal.style.display = 'none';
 		}
 	});
 
-	closeModalButton.addEventListener('click', () => {
-		modalCreateList.style.display = 'none';
+	closeBtn.addEventListener('click', () => {
+		modal.style.display = 'none';
 	});
 };
 
-//CREATING A NEW LIST OF TASKS
-const createList = () => {
-	const formCreateNewList = document.querySelector('.form_create_list');
-	const inputListName = document.querySelector('#list_name_input');
-	const listItems = document.querySelector('.list_items');
-	const instruction = document.querySelector('.instruction');
-	const modalCreateList = document.querySelector('.modal');
-
-	formCreateNewList.addEventListener('submit', e => {
-		e.preventDefault();
-		if (inputListName.value) {
-			const li = document.createElement('li');
-			li.textContent = inputListName.value;
-			li.classList.add('list_items');
-			listItems.appendChild(li);
-			instruction.textContent =
-				'Select a List to see your tasks for today';
-			instruction.classList.add('instruction_header');
-		}
-		modalCreateList.style.display = 'none';
-		inputListName.value = '';
-	});
-};
-
-//MAIN NAVEGATION MENU - SLIDER
+//MAIN NAVEGATION MENU - SLIDER BY CLICKING BURGER BUTON
 const navSlide = () => {
 	const burger = document.querySelector('.burger');
-	const nav = document.querySelector('.nav-links');
-	const navLinks = document.querySelectorAll('.nav-links li');
 
 	burger.addEventListener('click', () => {
-		//Toggle Nav
-		nav.classList.toggle('nav-active');
-
-		//Animate Links
-		navLinks.forEach((link, index) => {
-			if (link.style.animation) {
-				link.style.animation = '';
-			} else {
-				link.style.animation = `navLinkFade 0.5s ease forwards ${index /
-					7 +
-					0.5}s`;
-			}
-		});
-		//Burger Animation
+		navSlidingEvent();
+		// burger.classList.toggle('toggle');
 		burger.classList.toggle('toggle');
+	});
+};
+
+//HOME CLICK ON MAIN NAVEGATION
+const navSlideHomeLink = () => {
+	const homeLink = document.querySelector('[remove_sliders]');
+	const burger = document.querySelector('.burger');
+
+	homeLink.addEventListener('click', () => {
+		navSlidingEvent();
+		burger.classList.toggle('toggle');
+	});
+};
+
+//MAIN NAVEGATION AND LISTS SLIDER - JOINT ANIMATION SETTING
+const navSlidingEvent = () => {
+	const nav = document.querySelector('.nav-links');
+	const navLinks = document.querySelectorAll('.nav-links li');
+	const listsSlider = document.querySelector('[lists_slider_container]');
+	const tasksSlider = document.querySelector('[tasks_slider_container]');
+	//List slider Closes and Main Nav Opens
+	tasksSlider.style.transform = 'translateX(-100%)';
+	listsSlider.style.transform = 'translateX(-100%)';
+	nav.classList.toggle('nav-active');
+
+	//Animate Links from Main Navegation
+	ulContentSliderAnimation(navLinks);
+};
+
+const ulContentSliderAnimation = list => {
+	list.forEach((li, index) => {
+		if (li.style.animation) {
+			li.style.animation = '';
+		} else {
+			li.style.animation = `liFade 0.5s ease forwards ${index / 7 +
+				0.5}s`;
+		}
+	});
+};
+
+// LISTS SLIDER SHOW
+const listSliderToggleEvent = () => {
+	const listsSlider = document.querySelector('[lists_slider_container]');
+
+	listsSlider.style.transform = 'translateX(0%)';
+};
+
+//CLICKING LISTS OF TASKS ON MAIN NAVEGATION
+const sliderListsToggle = () => {
+	const listsSliderToggle = document.querySelector('[lists_slider_toggle]');
+	const burger = document.querySelector('.burger');
+
+	listsSliderToggle.addEventListener('click', () => {
+		navSlidingEvent();
+		burger.classList.toggle('toggle');
+		listSliderToggleEvent();
+	});
+};
+
+// ANIMATION FOR BUTTON SUBMIT NEW LIST NAME ON LISTS SCREEN
+const btnSubmtitAnimationToggle = (button, input) => {
+	input.addEventListener('focus', () => {
+		button.classList.add('btn_submit');
+	});
+	input.addEventListener('blur', () => {
+		button.classList.remove('btn_submit');
+	});
+};
+
+//OPENING SLIDER WITH TASKS FROM A LIST
+
+const tasksFromList = () => {
+	const list = document.querySelector('[list_id_0] div label');
+
+	list.addEventListener('click', () => {
+		const listsSlider = document.querySelector('[lists_slider_container]');
+		const tasksSlider = document.querySelector('[tasks_slider_container]');
+
+		listsSlider.style.transform = 'translateX(-100%)';
+		tasksSlider.style.transform = 'translateX(0%)';
 	});
 };
 
 //LOADING THE WEATHER API INFO ON HOME PAGE
 
 const weatherApiInfoLoader = () => {
-
 	window.addEventListener(`load`, () => {
-
 		// Fetch variables from html
 		let long;
 		let lat;
@@ -83,33 +118,30 @@ const weatherApiInfoLoader = () => {
 		let temp = document.querySelector(`.temperature`);
 		let tempDescription = document.querySelector(`.weather_description`);
 		let icon = document.querySelector(`.weather_icon`);
-	
-
 
 		//Get current location
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(position => {
-	
 				long = position.coords.longitude;
 				lat = position.coords.latitude;
-			  
+
 				const api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=fdc20835f2afc8721c378d891785f78d`;
-				
-				// Fetch API 
+
+				// Fetch API
 				fetch(api)
 					.then(response => response.json())
 					.then(data => {
-						console.log(data)
+						console.log(data);
 
 						//Display temperature
 						const temperature = data.main.temp;
 						const celsius = Math.floor(temperature - 273.15);
-						temp.textContent = `${celsius}° C` ; 
+						temp.textContent = `${celsius}° C`;
 						console.log(temperature);
 
 						//Display temperature description
 						tempDescription.textContent = data.weather[0].main;
-						console.log(tempDescription)
+						console.log(tempDescription);
 						weatherDisplay.appendChild(tempDescription);
 						console.log(tempDescription);
 
@@ -122,56 +154,63 @@ const weatherApiInfoLoader = () => {
 						iconId = data.weather[0].icon;
 						// icon.setAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`);
 						// icon.getAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`) ;
-						
+
 						// iconId.textContent = icon;
-						icon.innerHTML=`<img src = "icons/${iconId}.png"/>`;
-						
-					     weatherDisplay.appendChild(icon);
-					 
-						 console.log(icon)
-						
-						
+						icon.innerHTML = `<img src = "icons/${iconId}.png"/>`;
+
+						weatherDisplay.appendChild(icon);
+
+						console.log(icon);
 					});
-				
 			});
-	
 		}
 	});
-}
-
-
+};
 
 const greetingScreen = () => {
 	let today = new Date();
 	let hourNow = today.getHours();
 	const greeting = document.querySelector(`.greeting`);
-	
-	if (hourNow > 18) {
-		greeting.textContent = `Good evening!`
-	}
-	else if (hourNow > 12) {
-		greeting.textContent = `Good afternoon!`
-	}
-	else if (hourNow > 0) {
-		greeting.textContent = `Good morning!`;
-	}
-	else {
-		greeting.textContent = `Welcome!`
-	}	
-}
 
+	if (hourNow > 18) {
+		greeting.textContent = `Good evening!`;
+	} else if (hourNow > 12) {
+		greeting.textContent = `Good afternoon!`;
+	} else if (hourNow > 0) {
+		greeting.textContent = `Good morning!`;
+	} else {
+		greeting.textContent = `Welcome!`;
+	}
+};
 
 const weatherIcon = document.querySelector(`.weather_icon`);
 
-
 //EXECUTING ALL FUNCTIONS
 const app = () => {
-	navSlide();
-	modalCreateList();
-	createList();
+	const btnNewList = document.querySelector('#btn_new_list');
+	const modalCreateList = document.querySelector('#list_creation_modal');
+	const closeNewListModalButton = document.querySelector(
+		'#close_new_list_modal',
+	);
+	const modalCreateTask = document.querySelector('#task_creation_modal');
+	const closeNewTaskModal = document.querySelector('#close_new_task_modal');
+	const btnActionCreateNewTeask = document.querySelector('#btn_new_task');
+
+	const listNameInput = document.querySelector('#list_name_input');
+	const btnSubmitNewList = document.querySelector('#btn_submit_new_list');
+	const taskNameInput = document.querySelector('#task_name_input');
+	const btnSubmitNewTask = document.querySelector('#btn_submit_new_task');
+
 	weatherApiInfoLoader();
 	greetingScreen();
-	
+	navSlide();
+	sliderListsToggle();
+	navSlideHomeLink();
+	tasksFromList();
+	modal(btnNewList, modalCreateList, closeNewListModalButton);
+	modal(btnActionCreateNewTeask, modalCreateTask, closeNewTaskModal);
+	btnSubmtitAnimationToggle(btnSubmitNewList, listNameInput);
+	btnSubmtitAnimationToggle(btnSubmitNewTask, taskNameInput);
 };
 
 app();
