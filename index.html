@@ -13,8 +13,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="styles.css" />
-		
-		
+
 		<script
 			defer
 			src="https://kit.fontawesome.com/7fa246b183.js"
@@ -46,179 +45,182 @@
 				<section class="intro">
 					<h2 class="greeting"></h2>
 					<p class="instruction">
-						To use your Daily Planner, open the menu and start by creating your first List of Tasks.
+						To use your Daily Planner, open the menu and start by
+						creating your first List of Tasks.
 					</p>
 				</section>
 
 				<section class="weather_display">
-					<div class="temperature"><p><span> ° C</span></p> </span></div>
-					<div class = "weather_icon">
-							<img src="./icons/" alt = "Weather icon"></div>
+					<div class="temperature"></div>
+					<div class="weather_icon">
+						<img src="./icons/" alt="Weather icon" />
+					</div>
+
 					<span class="location"></span>
-					
+
 					<p class="weather_description"></p>
 				</section>
-<!-- SLIDER SCREEN FOR LISTS OF TASKS -->
-<div class="slider_container" lists_slider_container>
-	<div class="wrapper">
-		<h2 class="lists_heading">
-			My Lists
-		</h2>
-		<ul class="list_of_lists">
-			<!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
-			<li class="li_frame" list_id_0>
-				<div class="input_container">
-					<input
-						type="checkbox"
-						id="list1"
-						class="list_checkbox"
-					/>
-					<label id="for_list1" class="list_name"
-						>LIST 1</label
-					>
-				</div>
-				<span class="delete_list"
-					><i class="fas fa-trash-alt"></i
-				></span>
-			</li>
-			<li class="li_frame">
-				<div class="input_container">
-					<input
-						type="checkbox"
-						id="list2"
-						class="list_checkbox"
-					/>
-					<label id="for_list2" class="list_name"
-						>LIST 2 snlscnlwcwc jkcnwcwlc
-						cnwlmclw</label
-					>
-				</div>
-				<span class="delete_list"
-					><i class="fas fa-trash-alt"></i
-				></span>
-			</li>
-		</ul>
-	</div>
-	<div class="action">
-		<button id="btn_new_list" class="action_btn">
-			<i class="fas fa-plus"></i>
-		</button>
-	</div>
-	<div id="list_creation_modal" class="modal">
-		<div class="modal_content">
-			<div id="close_new_list_modal" class="close">
-				&times;
-			</div>
-			<div class="form_container">
-				<form>
-					<div class="form_create_list">
-						<input
-							type="text"
-							id="list_name_input"
-							name="list_name"
-							autocomplete="off"
-							required
-						/>
-						<label
-							for="list_name"
-							class="label_name"
-							><span class="label_text"
-								>List Name</span
-							></label
-						>
+				<!-- SLIDER SCREEN FOR LISTS OF TASKS -->
+				<div class="slider_container" lists_slider_container>
+					<div class="wrapper">
+						<h2 class="lists_heading">
+							My Lists
+						</h2>
+						<ul class="list_of_lists">
+							<!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
+							<li class="li_frame" list_id_0>
+								<div class="input_container">
+									<input
+										type="checkbox"
+										id="list1"
+										class="list_checkbox"
+									/>
+									<label id="for_list1" class="list_name"
+										>LIST 1</label
+									>
+								</div>
+								<span class="delete_list"
+									><i class="fas fa-trash-alt"></i
+								></span>
+							</li>
+							<li class="li_frame">
+								<div class="input_container">
+									<input
+										type="checkbox"
+										id="list2"
+										class="list_checkbox"
+									/>
+									<label id="for_list2" class="list_name"
+										>LIST 2 snlscnlwcwc jkcnwcwlc
+										cnwlmclw</label
+									>
+								</div>
+								<span class="delete_list"
+									><i class="fas fa-trash-alt"></i
+								></span>
+							</li>
+						</ul>
 					</div>
-					<button
-						id="btn_submit_new_list"
-						class="btn btn_new_list"
-					>
-						Add
-					</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- SLIDER FOR TODOS FROM SELECTED LIST -->
-<div class="slider_container" tasks_slider_container>
-	<div class="wrapper">
-		<h2 class="lists_heading">
-			My Tasks from Variable List
-		</h2>
-		<ul class="todos_from_list">
-			<!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
-			<li class="li_frame">
-				<div class="input_container">
-					<input
-						type="checkbox"
-						id="task1"
-						class="task_checkbox"
-					/>
-					<label id="for_task1" class="list_name"
-						>TASK 1</label
-					>
-				</div>
-				<span class="delete_list"
-					><i class="fas fa-trash-alt"></i
-				></span>
-			</li>
-			<li class="li_frame">
-				<div class="input_container">
-					<input
-						type="checkbox"
-						id="task2"
-						class="task_checkbox"
-					/>
-					<label id="for_task2" class="list_name"
-						>TASK 2 snlscnlwcwc jkcnwcwlc
-						cnwlmclw</label
-					>
-				</div>
-				<span class="delete_list"
-					><i class="fas fa-trash-alt"></i
-				></span>
-			</li>
-		</ul>
-	</div>
-	<div class="action">
-		<button id="btn_new_task" class="action_btn">
-			<i class="fas fa-plus"></i>
-		</button>
-	</div>
-	<div id="task_creation_modal" class="modal">
-		<div class="modal_content">
-			<div id="close_new_task_modal" class="close">
-				&times;
-			</div>
-			<div class="form_container">
-				<form>
-					<div class="form_create_list">
-						<input
-							type="text"
-							id="task_name_input"
-							name="task_name"
-							autocomplete="off"
-							required
-						/>
-						<label
-							for="task_name"
-							class="label_name"
-							><span class="label_text"
-								>New Task Name</span
-							></label
-						>
+					<div class="action">
+						<button id="btn_new_list" class="action_btn">
+							<i class="fas fa-plus"></i>
+						</button>
 					</div>
-					<button
-						id="btn_submit_new_task"
-						class="btn btn_new_list"
-					>
-						Add
-					</button>
-				</form>
-			</div>
+					<div id="list_creation_modal" class="modal">
+						<div class="modal_content">
+							<div id="close_new_list_modal" class="close">
+								&times;
+							</div>
+							<div class="form_container">
+								<form>
+									<div class="form_create_list">
+										<input
+											type="text"
+											id="list_name_input"
+											name="list_name"
+											autocomplete="off"
+											required
+										/>
+										<label
+											for="list_name"
+											class="label_name"
+											><span class="label_text"
+												>List Name</span
+											></label
+										>
+									</div>
+									<button
+										id="btn_submit_new_list"
+										class="btn btn_new_list"
+									>
+										Add
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- SLIDER FOR TODOS FROM SELECTED LIST -->
+				<div class="slider_container" tasks_slider_container>
+					<div class="wrapper">
+						<h2 class="lists_heading">
+							My Tasks from Variable List
+						</h2>
+						<ul class="todos_from_list">
+							<!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
+							<li class="li_frame">
+								<div class="input_container">
+									<input
+										type="checkbox"
+										id="task1"
+										class="task_checkbox"
+									/>
+									<label id="for_task1" class="list_name"
+										>TASK 1</label
+									>
+								</div>
+								<span class="delete_list"
+									><i class="fas fa-trash-alt"></i
+								></span>
+							</li>
+							<li class="li_frame">
+								<div class="input_container">
+									<input
+										type="checkbox"
+										id="task2"
+										class="task_checkbox"
+									/>
+									<label id="for_task2" class="list_name"
+										>TASK 2 snlscnlwcwc jkcnwcwlc
+										cnwlmclw</label
+									>
+								</div>
+								<span class="delete_list"
+									><i class="fas fa-trash-alt"></i
+								></span>
+							</li>
+						</ul>
+					</div>
+					<div class="action">
+						<button id="btn_new_task" class="action_btn">
+							<i class="fas fa-plus"></i>
+						</button>
+					</div>
+					<div id="task_creation_modal" class="modal">
+						<div class="modal_content">
+							<div id="close_new_task_modal" class="close">
+								&times;
+							</div>
+							<div class="form_container">
+								<form>
+									<div class="form_create_list">
+										<input
+											type="text"
+											id="task_name_input"
+											name="task_name"
+											autocomplete="off"
+											required
+										/>
+										<label
+											for="task_name"
+											class="label_name"
+											><span class="label_text"
+												>New Task Name</span
+											></label
+										>
+									</div>
+									<button
+										id="btn_submit_new_task"
+										class="btn btn_new_list"
+									>
+										Add
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
 		</div>
-	</div>
-</div>
-</main>
-</div>
-</body>
+	</body>
 </html>
