@@ -114,6 +114,7 @@ const weatherApiInfoLoader = () => {
 		let long;
 		let lat;
 		const weatherDisplay = document.querySelector(`.weather_display`);
+
 		let location = document.querySelector(`.location, span`);
 		let temp = document.querySelector(`.temperature`);
 		let tempDescription = document.querySelector(`.weather_description`);
@@ -143,7 +144,12 @@ const weatherApiInfoLoader = () => {
 						tempDescription.textContent = data.weather[0].main;
 						console.log(tempDescription);
 						weatherDisplay.appendChild(tempDescription);
-						console.log(tempDescription);
+
+						//update background image accordingly
+						const bodyBackground = document.querySelector('body');
+						const urlWeatherParameter = tempDescription.innerText;
+
+						bodyBackground.style.backgroundImage = `url(https://source.unsplash.com/random/720×960/?${urlWeatherParameter})`;
 
 						//Display location
 						location.textContent = data.name;
@@ -182,8 +188,6 @@ const greetingScreen = () => {
 		greeting.textContent = `Welcome!`;
 	}
 };
-
-const weatherIcon = document.querySelector(`.weather_icon`);
 
 //EXECUTING ALL FUNCTIONS
 const app = () => {
