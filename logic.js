@@ -69,11 +69,109 @@ const navSlide = () => {
 	});
 };
 
+//LOADING THE WEATHER API INFO ON HOME PAGE
+
+const weatherApiInfoLoader = () => {
+
+	window.addEventListener(`load`, () => {
+
+		// Fetch variables from html
+		let long;
+		let lat;
+		const weatherDisplay = document.querySelector(`.weather_display`);
+		let location = document.querySelector(`.location, span`);
+		let temp = document.querySelector(`.temperature`);
+		let tempDescription = document.querySelector(`.weather_description`);
+		let icon = document.querySelector(`.weather_icon`);
+	
+
+
+		//Get current location
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(position => {
+	
+				long = position.coords.longitude;
+				lat = position.coords.latitude;
+			  
+				const api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=fdc20835f2afc8721c378d891785f78d`;
+				
+				// Fetch API 
+				fetch(api)
+					.then(response => response.json())
+					.then(data => {
+						console.log(data)
+
+						//Display temperature
+						const temperature = data.main.temp;
+						const celsius = Math.floor(temperature - 273.15);
+						temp.textContent = `${celsius}° C` ; 
+						console.log(temperature);
+
+						//Display temperature description
+						tempDescription.textContent = data.weather[0].main;
+						console.log(tempDescription)
+						weatherDisplay.appendChild(tempDescription);
+						console.log(tempDescription);
+
+						//Display location
+						location.textContent = data.name;
+						weatherDisplay.appendChild(location);
+
+						//Display icon
+						// let image = document.createElement(`img`);
+						iconId = data.weather[0].icon;
+						// icon.setAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`);
+						// icon.getAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`) ;
+						
+						// iconId.textContent = icon;
+						icon.innerHTML=`<img src = "icons/${iconId}.png"/>`;
+						
+					     weatherDisplay.appendChild(icon);
+					 
+						 console.log(icon)
+						
+						
+					});
+				
+			});
+	
+		}
+	});
+}
+
+
+
+const greetingScreen = () => {
+	let today = new Date();
+	let hourNow = today.getHours();
+	const greeting = document.querySelector(`.greeting`);
+	
+	if (hourNow > 18) {
+		greeting.textContent = `Good evening!`
+	}
+	else if (hourNow > 12) {
+		greeting.textContent = `Good afternoon!`
+	}
+	else if (hourNow > 0) {
+		greeting.textContent = `Good morning!`;
+	}
+	else {
+		greeting.textContent = `Welcome!`
+	}	
+}
+
+
+const weatherIcon = document.querySelector(`.weather_icon`);
+
+
 //EXECUTING ALL FUNCTIONS
 const app = () => {
 	navSlide();
 	modalCreateList();
 	createList();
+	weatherApiInfoLoader();
+	greetingScreen();
+	
 };
 
 app();
