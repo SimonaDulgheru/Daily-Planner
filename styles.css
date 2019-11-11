@@ -209,7 +209,16 @@ body {
 .weather_display p {
 	color: white;
 	margin-top: 8px;
+	
 }
+
+.temperature{
+	color: white ;
+	font-weight: bold;
+	font-size: larger;
+}
+
+
 
 /* ACTION BUTTON */
 
