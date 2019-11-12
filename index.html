@@ -1,274 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, maximum-scale=1"
-		/>
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>My Daily Planner</title>
-		<link
-			href="https://fonts.googleapis.com/css?family=Tangerine:400,700&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="styles.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Daily Planner</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Tangerine:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
 
-		<script
-			defer
-			src="https://kit.fontawesome.com/7fa246b183.js"
-			crossorigin="anonymous"
-		></script>
-		<script defer src="logic.js"></script>
-	</head>
-	<body>
-		<div class="overlay">
-			<header class="header">
-				<h2 class="logo">
-					<i class="fas fa-calendar-alt"></i> My Daily Planner
-				</h2>
-				<nav class="nav">
-					<ul class="nav-links">
-						<li remove_sliders>Home</li>
-						<li lists_slider_toggle>My Lists of Tasks</li>
-						<li map_slider_toggle>Prefered Locations</li>
-						<li about_slider_toggle>About</li>
-					</ul>
-					<div class="burger">
-						<div class="line1"></div>
-						<div class="line2"></div>
-						<div class="line3"></div>
-					</div>
-				</nav>
-			</header>
-			<main>
-				<section class="intro">
-					<h2 class="greeting"></h2>
-					<p class="instruction">
-						To use your Daily Planner, open the menu and start by
-						creating your first List of Tasks.
-					</p>
-				</section>
+    <script
+      defer
+      src="https://kit.fontawesome.com/7fa246b183.js"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="logic.js"></script>
+  </head>
+  <body>
+    <div class="overlay">
+      <header class="header">
+        <h2 class="logo">
+          <i class="fas fa-calendar-alt"></i> My Daily Planner
+        </h2>
+        <nav class="nav">
+          <ul class="nav-links">
+            <li remove_sliders>Home</li>
+            <li lists_slider_toggle>My Lists of Tasks</li>
+            <li map_slider_toggle>Prefered Locations</li>
+            <li about_slider_toggle>About</li>
+          </ul>
+          <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <section class="intro">
+          <h2 class="greeting"></h2>
+          <p class="instruction">
+            To use your Daily Planner, open the menu and start by creating your
+            first List of Tasks.
+          </p>
+        </section>
 
-				<section class="weather_display">
-					<div class="temperature"></div>
-					<div class="weather_icon">
-						<img src="./icons/" alt="Weather icon" />
-					</div>
+        <section class="weather_display">
+          <div class="temperature"></div>
+          <div class="weather_icon">
+            <img src="./icons/" alt="Weather icon" />
+          </div>
 
-					<span class="location"></span>
+          <span class="location"></span>
 
-					<p class="weather_description"></p>
-				</section>
-				<!-- SLIDER SCREEN FOR LISTS OF TASKS -->
-				<div class="slider_container" lists_slider_container>
-					<div class="wrapper">
-						<h2 class="lists_heading">
-							My Lists
-						</h2>
-						<ul class="list_of_lists">
-							<!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
-							<li class="li_frame" list_id_0>
-								<div class="input_container">
-									<input
-										type="checkbox"
-										id="list1"
-										class="list_checkbox"
-									/>
-									<label id="for_list1" class="list_name"
-										>LIST 1</label
-									>
-								</div>
-								<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-							<li class="li_frame">
-								<div class="input_container">
-									<input
-										type="checkbox"
-										id="list2"
-										class="list_checkbox"
-									/>
-									<label id="for_list2" class="list_name"
-										>LIST 2 snlscnlwcwc jkcnwcwlc
-										cnwlmclw</label
-									>
-								</div>
-								<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-						</ul>
-					</div>
-					<div class="action">
-						<button id="btn_new_list" class="action_btn">
-							<i class="fas fa-plus"></i>
-						</button>
-					</div>
-					<div id="list_creation_modal" class="modal">
-						<div class="modal_content">
-							<div id="close_new_list_modal" class="close">
-								&times;
-							</div>
-							<div class="form_container">
-								<form>
-									<div class="form_create_list">
-										<input
-											type="text"
-											id="list_name_input"
-											name="list_name"
-											autocomplete="off"
-											required
-										/>
-										<label
-											for="list_name"
-											class="label_name"
-											><span class="label_text"
-												>List Name</span
-											></label
-										>
-									</div>
-									<button
-										id="btn_submit_new_list"
-										class="btn btn_new_list"
-									>
-										Add
-									</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- SLIDER FOR TODOS FROM SELECTED LIST -->
-				<div class="slider_container" tasks_slider_container>
-					<div class="wrapper">
-						<h2 class="lists_heading">
-							My Tasks from Variable List
-						</h2>
-						<ul class="todos_from_list">
-							<!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
-							<li class="li_frame">
-								<div class="input_container">
-									<input
-										type="checkbox"
-										id="task1"
-										class="task_checkbox"
-									/>
-									<label id="for_task1" class="list_name"
-										>TASK 1</label
-									>
-								</div>
-								<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-							<li class="li_frame">
-								<div class="input_container">
-									<input
-										type="checkbox"
-										id="task2"
-										class="task_checkbox"
-									/>
-									<label id="for_task2" class="list_name"
-										>TASK 2 snlscnlwcwc jkcnwcwlc
-										cnwlmclw</label
-									>
-								</div>
-								<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-						</ul>
-					</div>
-					<div class="action">
-						<button id="btn_new_task" class="action_btn">
-							<i class="fas fa-plus"></i>
-						</button>
-					</div>
-					<div id="task_creation_modal" class="modal">
-						<div class="modal_content">
-							<div id="close_new_task_modal" class="close">
-								&times;
-							</div>
-							<div class="form_container">
-								<form>
-									<div class="form_create_list">
-										<input
-											type="text"
-											id="task_name_input"
-											name="task_name"
-											autocomplete="off"
-											required
-										/>
-										<label
-											for="task_name"
-											class="label_name"
-											><span class="label_text"
-												>New Task Name</span
-											></label
-										>
-									</div>
-									<button
-										id="btn_submit_new_task"
-										class="btn btn_new_list"
-									>
-										Add
-									</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- SLIDER FOR PREFERRED LOCATION -->
-				<div class="slider_container" locations_slider_container>
-					<div class="wrapper">
-						<h2 class="map_headings">
-							My Preferred Locations
-						</h2>
-						<div class="map_container">
-							<img
-								src="https://compote.slate.com/images/ff47615b-f476-4479-af98-add0a5255c80.jpeg?width=780&height=520&rect=1560x1040&offset=0x0"
-								alt=""
-								class="map_placeholder"
-							/>
-						</div>
+          <p class="weather_description"></p>
+        </section>
+        <!-- SLIDER SCREEN FOR LISTS OF TASKS -->
+        <div class="slider_container" lists_slider_container>
+          <div class="wrapper">
+            <h2 class="lists_heading">
+              My Lists
+            </h2>
+            <ul class="list_of_lists">
+              <!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
+              <li class="li_frame" list_id_0>
+                <div class="input_container">
+                  <input type="checkbox" id="list1" class="list_checkbox" />
+                  <label id="for_list1" class="list_name">LIST 1</label>
+                </div>
+                <span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+              <li class="li_frame">
+                <div class="input_container">
+                  <input type="checkbox" id="list2" class="list_checkbox" />
+                  <label id="for_list2" class="list_name"
+                    >LIST 2 snlscnlwcwc jkcnwcwlc cnwlmclw</label
+                  >
+                </div>
+                <span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+            </ul>
+          </div>
+          <div class="action">
+            <button id="btn_new_list" class="action_btn">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <div id="list_creation_modal" class="modal">
+            <div class="modal_content">
+              <div id="close_new_list_modal" class="close">
+                &times;
+              </div>
+              <div class="form_container">
+                <form>
+                  <div class="form_create_list">
+                    <input
+                      type="text"
+                      id="list_name_input"
+                      name="list_name"
+                      autocomplete="off"
+                      required
+                    />
+                    <label for="list_name" class="label_name"
+                      ><span class="label_text">List Name</span></label
+                    >
+                  </div>
+                  <button id="btn_submit_new_list" class="btn btn_new_list">
+                    Add
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SLIDER FOR TODOS FROM SELECTED LIST -->
+        <div class="slider_container" tasks_slider_container>
+          <div class="wrapper">
+            <h2 class="lists_heading">
+              My Tasks from Variable List
+            </h2>
+            <ul class="todos_from_list">
+              <!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
+              <li class="li_frame">
+                <div class="input_container">
+                  <input type="checkbox" id="task1" class="task_checkbox" />
+                  <label id="for_task1" class="list_name">TASK 1</label>
+                </div>
+                <span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+              <li class="li_frame">
+                <div class="input_container">
+                  <input type="checkbox" id="task2" class="task_checkbox" />
+                  <label id="for_task2" class="list_name"
+                    >TASK 2 snlscnlwcwc jkcnwcwlc cnwlmclw</label
+                  >
+                </div>
+                <span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+            </ul>
+            <div class="btn_wrapper">
+              <button type="button" class="btn btn_standard">
+                Back to Lists
+              </button>
+            </div>
+          </div>
+          <div class="action">
+            <button id="btn_new_task" class="action_btn">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <div id="task_creation_modal" class="modal">
+            <div class="modal_content">
+              <div id="close_new_task_modal" class="close">
+                &times;
+              </div>
+              <div class="form_container">
+                <form>
+                  <div class="form_create_list">
+                    <input
+                      type="text"
+                      id="task_name_input"
+                      name="task_name"
+                      autocomplete="off"
+                      required
+                    />
+                    <label for="task_name" class="label_name"
+                      ><span class="label_text">New Task Name</span></label
+                    >
+                  </div>
+                  <button id="btn_submit_new_task" class="btn btn_new_list">
+                    Add
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SLIDER FOR PREFERRED LOCATION -->
+        <div class="slider_container" locations_slider_container>
+          <div class="wrapper">
+            <h2 class="map_headings">
+              My Preferred Locations
+            </h2>
+            <div class="map_container">
+              <img
+                src="https://compote.slate.com/images/ff47615b-f476-4479-af98-add0a5255c80.jpeg?width=780&height=520&rect=1560x1040&offset=0x0"
+                alt=""
+                class="map_placeholder"
+              />
+            </div>
 
-						<ul class="saved_locations_list">
-							<li class="location_item">
-								Royal Leamington Spa<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-							<li class="location_item" selected>
-								Coventry<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-							<li class="location_item">
-								Birmingham<span class="delete_list"
-									><i class="fas fa-trash-alt"></i
-								></span>
-							</li>
-						</ul>
-						<section class="weather_display">
-							<div class="temperature"></div>
-							<div class="weather_icon">
-								<img src="./icons/" alt="Weather icon" />
-							</div>
+            <ul class="saved_locations_list">
+              <li class="location_item">
+                Royal Leamington Spa<span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+              <li class="location_item" selected>
+                Coventry<span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+              <li class="location_item">
+                Birmingham<span class="delete_list"
+                  ><i class="fas fa-trash-alt"></i
+                ></span>
+              </li>
+            </ul>
+            <section class="weather_display">
+              <div class="temperature"></div>
+              <div class="weather_icon">
+                <img src="./icons/" alt="Weather icon" />
+              </div>
 
-							<span class="location"></span>
+              <span class="location"></span>
 
-							<p class="weather_description"></p>
-						</section>
-						<div class="action">
-							<button id="btn_new_location" class="action_btn">
-								<i class="fas fa-plus"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</main>
-		</div>
-	</body>
+              <p class="weather_description"></p>
+            </section>
+            <div class="action">
+              <button id="btn_new_location" class="action_btn">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
