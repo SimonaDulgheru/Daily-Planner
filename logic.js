@@ -203,6 +203,19 @@ const greetingScreen = () => {
   }
 };
 
+//BUTTON GO BACK TO LISTS SLIDER FROM TASKS SLIDER
+const goBackToListsFromTasks = () => {
+  const buttonGoBackToLists = document.querySelector("[btn_go_back]");
+
+  buttonGoBackToLists.addEventListener("click", () => {
+    const listsSlider = document.querySelector("[lists_slider_container]");
+    const tasksSlider = document.querySelector("[tasks_slider_container]");
+
+    listsSlider.style.transform = "translateX(0%)";
+    tasksSlider.style.transform = "translateX(-100%)";
+  });
+};
+
 //EXECUTING ALL FUNCTIONS
 const app = () => {
   const btnNewList = document.querySelector("#btn_new_list");
@@ -227,6 +240,7 @@ const app = () => {
   tasksFromList();
   modal(btnNewList, modalCreateList, closeNewListModalButton);
   modal(btnActionCreateNewTeask, modalCreateTask, closeNewTaskModal);
+  goBackToListsFromTasks();
   btnSubmtitAnimationToggle(btnSubmitNewList, listNameInput);
   btnSubmtitAnimationToggle(btnSubmitNewTask, taskNameInput);
 };
