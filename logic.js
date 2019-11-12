@@ -43,7 +43,11 @@ const navSlidingEvent = () => {
 	const navLinks = document.querySelectorAll('.nav-links li');
 	const listsSlider = document.querySelector('[lists_slider_container]');
 	const tasksSlider = document.querySelector('[tasks_slider_container]');
+	const locationsSlider = document.querySelector(
+		'[locations_slider_container]',
+	);
 	//List slider Closes and Main Nav Opens
+	locationsSlider.style.transform = 'translateX(-100%)';
 	tasksSlider.style.transform = 'translateX(-100%)';
 	listsSlider.style.transform = 'translateX(-100%)';
 	nav.classList.toggle('nav-active');
@@ -63,22 +67,37 @@ const ulContentSliderAnimation = list => {
 	});
 };
 
-// LISTS SLIDER SHOW
+// SLIDER SHOW
 const listSliderToggleEvent = () => {
 	const listsSlider = document.querySelector('[lists_slider_container]');
 
 	listsSlider.style.transform = 'translateX(0%)';
 };
 
-//CLICKING LISTS OF TASKS ON MAIN NAVEGATION
+const locationsSliderToggleEvent = () => {
+	const locationsSlider = document.querySelector(
+		'[locations_slider_container]',
+	);
+
+	locationsSlider.style.transform = 'translateX(0%)';
+};
+
+//CLICKING LINKS TO SLIDERS ON MAIN NAVEGATION
 const sliderListsToggle = () => {
 	const listsSliderToggle = document.querySelector('[lists_slider_toggle]');
+	const mapSliderToggle = document.querySelector('[map_slider_toggle]');
+
 	const burger = document.querySelector('.burger');
 
 	listsSliderToggle.addEventListener('click', () => {
 		navSlidingEvent();
 		burger.classList.toggle('toggle');
 		listSliderToggleEvent();
+	});
+	mapSliderToggle.addEventListener('click', () => {
+		navSlidingEvent();
+		burger.classList.toggle('toggle');
+		locationsSliderToggleEvent();
 	});
 };
 
@@ -106,8 +125,30 @@ const tasksFromList = () => {
 	});
 };
 
-//LOADING THE WEATHER API INFO ON HOME PAGE
+// ANIMATION FOR BUTTON SUBMIT NEW LIST NAME ON LISTS SCREEN
+const btnSubmtitAnimationToggle = (button, input) => {
+	input.addEventListener('focus', () => {
+		button.classList.add('btn_submit');
+	});
+	input.addEventListener('blur', () => {
+		button.classList.remove('btn_submit');
+	});
+};
 
+//OPENING SLIDER WITH TASKS FROM A LIST
+const tasksFromList = () => {
+	const list = document.querySelector('[list_id_0] div label');
+
+	list.addEventListener('click', () => {
+		const listsSlider = document.querySelector('[lists_slider_container]');
+		const tasksSlider = document.querySelector('[tasks_slider_container]');
+
+		listsSlider.style.transform = 'translateX(-100%)';
+		tasksSlider.style.transform = 'translateX(0%)';
+	});
+};
+
+//LOADING THE WEATHER API INFO ON HOME PAGE
 const weatherApiInfoLoader = () => {
 	window.addEventListener(`load`, () => {
 		// Fetch variables from html
