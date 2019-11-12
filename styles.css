@@ -397,6 +397,7 @@ body {
 	transition: all 0.5s ease;
 }
 
+
 .slider_open {
 	transform: translateX(0%);
 }
@@ -434,7 +435,6 @@ body {
 	box-shadow: 2px 2px 5px rgb(68, 4, 4);
 	display: flex;
 	justify-content: space-between;
-
 	text-transform: uppercase;
 }
 

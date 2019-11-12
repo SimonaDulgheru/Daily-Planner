@@ -73,6 +73,7 @@ const listSliderToggleEvent = () => {
 
 	listsSlider.style.transform = 'translateX(0%)';
 };
+
 const locationsSliderToggleEvent = () => {
 	const locationsSlider = document.querySelector(
 		'[locations_slider_container]',
@@ -85,6 +86,7 @@ const locationsSliderToggleEvent = () => {
 const sliderListsToggle = () => {
 	const listsSliderToggle = document.querySelector('[lists_slider_toggle]');
 	const mapSliderToggle = document.querySelector('[map_slider_toggle]');
+
 	const burger = document.querySelector('.burger');
 
 	listsSliderToggle.addEventListener('click', () => {
@@ -96,6 +98,30 @@ const sliderListsToggle = () => {
 		navSlidingEvent();
 		burger.classList.toggle('toggle');
 		locationsSliderToggleEvent();
+	});
+};
+
+// ANIMATION FOR BUTTON SUBMIT NEW LIST NAME ON LISTS SCREEN
+const btnSubmtitAnimationToggle = (button, input) => {
+	input.addEventListener('focus', () => {
+		button.classList.add('btn_submit');
+	});
+	input.addEventListener('blur', () => {
+		button.classList.remove('btn_submit');
+	});
+};
+
+//OPENING SLIDER WITH TASKS FROM A LIST
+
+const tasksFromList = () => {
+	const list = document.querySelector('[list_id_0] div label');
+
+	list.addEventListener('click', () => {
+		const listsSlider = document.querySelector('[lists_slider_container]');
+		const tasksSlider = document.querySelector('[tasks_slider_container]');
+
+		listsSlider.style.transform = 'translateX(-100%)';
+		tasksSlider.style.transform = 'translateX(0%)';
 	});
 };
 
@@ -224,7 +250,6 @@ const app = () => {
 	greetingScreen();
 	navSlide();
 	sliderListsToggle();
-
 	navSlideHomeLink();
 	tasksFromList();
 	modal(btnNewList, modalCreateList, closeNewListModalButton);
