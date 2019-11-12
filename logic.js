@@ -118,19 +118,12 @@ const weatherApiInfoLoader = () => {
 						weatherDisplay.appendChild(location);
 
 						//Display icon
-						// let image = document.createElement(`img`);
+						
 						iconId = data.weather[0].icon;
-						// icon.setAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`);
-						// icon.getAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`) ;
-						
-						// iconId.textContent = icon;
 						icon.innerHTML=`<img src = "icons/${iconId}.png"/>`;
-						
-					     weatherDisplay.appendChild(icon);
+					    weatherDisplay.appendChild(icon);
 					 
 						 console.log(icon)
-						
-						
 					});
 				
 			});
