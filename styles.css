@@ -330,17 +330,9 @@ body {
   overflow: hidden;
 }
 
-#list_name_input {
-  width: 100%;
-  height: 100%;
-  color: #595f6e;
-  padding-top: 20px;
-  border: none;
-  outline: none;
-  font-size: 18px;
-}
-
-#task_name_input {
+#list_name_input,
+#task_name_input,
+#postcode_input {
   width: 100%;
   height: 100%;
   color: #595f6e;
