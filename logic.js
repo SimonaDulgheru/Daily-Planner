@@ -122,7 +122,7 @@ const tasksFromList = () => {
 };
 
 //LOADING THE WEATHER API INFO ON HOME PAGE
-const weatherApiInfoLoader = () => {
+const weatherApiInfoLoader = callback => {
   window.addEventListener(`load`, () => {
     // Fetch variables from html
     let long;
@@ -160,11 +160,11 @@ const weatherApiInfoLoader = () => {
             weatherDisplay.appendChild(tempDescription);
 
             //update background image accordingly
-            const bodyBackground = document.querySelector("body");
+            // const bodyBackground = document.querySelector("body");
             const urlWeatherParameter = tempDescription.innerText;
 
-            bodyBackground.style.backgroundImage = `url(https://source.unsplash.com/random/720×960/?${urlWeatherParameter})`;
-
+            // bodyBackground.style.backgroundImage = `url(https://source.unsplash.com/random/720×960/?${urlWeatherParameter})`;
+            callback(urlWeatherParameter);
             //Display location
             location.textContent = data.name;
             weatherDisplay.appendChild(location);
@@ -185,6 +185,23 @@ const weatherApiInfoLoader = () => {
       });
     }
   });
+};
+
+//FETCH WITH UNSPLASH API
+const backgroundRender = query => {
+  const clientId = `ae8ebd2fbc68b90afdd9a661d6db0246867c4b7853cb4140566b12cd7e714791`;
+  const deviceOrientation =
+    window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+  console.log(deviceOrientation);
+  const url = `https://api.unsplash.com/photos/random?client_id=${clientId}&query=${query}&orientation=${deviceOrientation}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.urls.regular);
+      const bodyBackground = document.querySelector("body");
+      bodyBackground.style.backgroundImage = `url(${data.urls.regular})`;
+    });
 };
 
 const greetingScreen = () => {
@@ -238,7 +255,7 @@ const app = () => {
   const postcodeInput = document.querySelector("#postcode_input");
   const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");
 
-  weatherApiInfoLoader();
+  weatherApiInfoLoader(backgroundRender);
   greetingScreen();
   navSlide();
   sliderListsToggle();
