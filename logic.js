@@ -227,10 +227,16 @@ const app = () => {
   const closeNewTaskModal = document.querySelector("#close_new_task_modal");
   const btnActionCreateNewTeask = document.querySelector("#btn_new_task");
 
+  const modalPostcode = document.querySelector("#postcode_modal");
+  const closePostcodeModal = document.querySelector("#close_postcode_modal");
+  const btnActionFindPostcode = document.querySelector("#btn_new_location");
+
   const listNameInput = document.querySelector("#list_name_input");
   const btnSubmitNewList = document.querySelector("#btn_submit_new_list");
   const taskNameInput = document.querySelector("#task_name_input");
   const btnSubmitNewTask = document.querySelector("#btn_submit_new_task");
+  const postcodeInput = document.querySelector("#postcode_input");
+  const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");
 
   weatherApiInfoLoader();
   greetingScreen();
@@ -240,9 +246,11 @@ const app = () => {
   tasksFromList();
   modal(btnNewList, modalCreateList, closeNewListModalButton);
   modal(btnActionCreateNewTeask, modalCreateTask, closeNewTaskModal);
+  modal(btnActionFindPostcode, modalPostcode, closePostcodeModal);
   goBackToListsFromTasks();
   btnSubmtitAnimationToggle(btnSubmitNewList, listNameInput);
   btnSubmtitAnimationToggle(btnSubmitNewTask, taskNameInput);
+  btnSubmtitAnimationToggle(btnSubmitNewPostcode, postcodeInput);
 };
 
 app();
