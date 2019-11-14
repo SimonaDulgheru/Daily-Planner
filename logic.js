@@ -151,7 +151,7 @@ const weatherApiInfoLoader = callback => {
             //Display temperature
             const temperature = data.main.temp;
             const celsius = Math.floor(temperature - 273.15);
-            temp.textContent = `${celsius}° C`;
+            temp.textContent = `${celsius}°C`;
             console.log(temperature);
 
             //Display temperature description
