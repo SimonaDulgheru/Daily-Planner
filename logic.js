@@ -122,25 +122,28 @@ const sliderListsToggle = () => {
 // ANIMATION FOR BUTTON SUBMIT NEW LIST NAME ON LISTS SCREEN
 const btnSubmtitAnimationToggle = (button, input) => {
   input.addEventListener("focus", () => {
-    button.classList.add("btn_submit");
+    console.log(input)
+;    button.classList.add("btn_submit");
   });
+
+  
   input.addEventListener("blur", () => {
     button.classList.remove("btn_submit");
   });
 };
 
-//OPENING SLIDER WITH TASKS FROM A LIST
-const tasksFromList = () => {
-  const list = document.querySelector("[list_id_0] div label");
+// //OPENING SLIDER WITH TASKS FROM A LIST
+// const tasksFromList = () => {
+//   const list = document.querySelector('#list label');
 
-  list.addEventListener("click", () => {
-    const listsSlider = document.querySelector("[lists_slider_container]");
-    const tasksSlider = document.querySelector("[tasks_slider_container]");
+//   list.addEventListener("click", () => {
+//     const listsSlider = document.querySelector("[lists_slider_container]");
+//     const tasksSlider = document.querySelector("[tasks_slider_container]");
 
-    listsSlider.style.transform = "translateX(-100%)";
-    tasksSlider.style.transform = "translateX(0%)";
-  });
-};
+//     listsSlider.style.transform = "translateX(-100%)";
+//     tasksSlider.style.transform = "translateX(0%)";
+//   });
+// };
 
 //LOADING THE WEATHER API INFO ON HOME PAGE
 const weatherApiInfoLoader = callback => {
@@ -365,9 +368,9 @@ const app = () => {
   const closePostcodeModal = document.querySelector("#close_postcode_modal");
   const btnActionFindPostcode = document.querySelector("#btn_new_location");
 
-  const listNameInput = document.querySelector("#list_name_input");
+  const listNameInput = document.querySelector("#list_name_input").value;
   const btnSubmitNewList = document.querySelector("#btn_submit_new_list");
-  const taskNameInput = document.querySelector("#task_name_input");
+  const taskNameInput = document.querySelector("#task_name_input").value;
   const btnSubmitNewTask = document.querySelector("#btn_submit_new_task");
   // const postcodeInput = document.querySelector("#postcode_input");
   // const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");
@@ -377,7 +380,7 @@ const app = () => {
   navSlide();
   sliderListsToggle();
   navSlideHomeLink();
-  tasksFromList();
+  // tasksFromList();
   modal(btnNewList, modalCreateList, closeNewListModalButton);
   modal(btnActionCreateNewTeask, modalCreateTask, closeNewTaskModal);
   // modal(btnActionFindPostcode, modalPostcode, closePostcodeModal);

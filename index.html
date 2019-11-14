@@ -77,7 +77,7 @@
         <h2 class="lists_heading">
           My Lists
         </h2>
-        <ul class="list_of_lists">
+        <ul id="list-of-list" class="list_of_lists">
           <!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
           <li class="li_frame" list_id_0>
             <div class="input_container">
@@ -108,7 +108,7 @@
             &times;
           </div>
           <div class="form_container">
-            <form>
+            <form id="list-of-list-form">
               <div class="form_create_list">
                 <input
                   type="text"
@@ -132,7 +132,7 @@
     <!-- SLIDER FOR TODOS FROM SELECTED LIST -->
     <div class="slider_container" tasks_slider_container>
       <div class="wrapper">
-        <h2 class="lists_heading">
+        <h2 class="lists_heading" tasks-heading>
           My Tasks from Variable List
         </h2>
         <ul class="todos_from_list">
@@ -170,7 +170,7 @@
           <div id="close_new_task_modal" class="close">
             &times;
           </div>
-          <div class="form_container">
+          <div class="form_container" class ="new-task-form">
             <form>
               <div class="form_create_list">
                 <input
@@ -241,7 +241,7 @@
     <!-- About Us Page -->
     <div class="slider_container" about_slider>
       <div class="wrapper">
-        <h2 class="lists_heading">
+        <h2 class="lists_heading" >
           About this App
         </h2>
         <h3 class="lists_heading">Organize your To-dos for the day</h3>
@@ -263,5 +263,18 @@
         </p>
       </div>
     </div>
+    <template id = "list-of-list-template">
+
+      <li class="li_frame">
+        <div class="input_container">
+          <input type="checkbox" id="list" class="list_checkbox" />
+          <label for="for_list2" class="list_name"></label>
+        </div>
+        <span class="delete_list"
+          ><i class="fas fa-trash-alt"></i
+        ></span>
+      </li>
+    </template>
+    <script src ="todos.js"></script>
   </body>
 </html>
