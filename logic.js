@@ -356,7 +356,7 @@ const app = () => {
   navSlide();
   sliderListsToggle();
   navSlideHomeLink();
-  tasksFromList();
+  // tasksFromList();
   modal(btnNewList, modalCreateList, closeNewListModalButton);
   modal(btnActionCreateNewTeask, modalCreateTask, closeNewTaskModal);
   // modal(btnActionFindPostcode, modalPostcode, closePostcodeModal);
