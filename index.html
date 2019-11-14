@@ -21,7 +21,7 @@
     ></script>
     <script defer src="logic.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgv2V7bEM9SjSbkEdEF4SaIGkO8qq6rZk&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOFyF5IkiXBI_jDqawcIxwSjo8GWzYbsA&callback=initMap&libraries=places"
       async
       defer
     ></script>
@@ -200,6 +200,7 @@
             <h2 class="map_headings">
               My Preferred Locations
             </h2>
+
             <div class="map_container">
               <img
                 src="https://compote.slate.com/images/ff47615b-f476-4479-af98-add0a5255c80.jpeg?width=780&height=520&rect=1560x1040&offset=0x0"
@@ -247,23 +248,18 @@
                 &times;
               </div>
               <div class="form_container">
-                <form>
-                  <div class="form_create_list">
-                    <input
-                      type="text"
-                      id="postcode_input"
-                      name="postcode"
-                      autocomplete="off"
-                      required
-                    />
-                    <label for="postcode" class="label_name"
-                      ><span class="label_text">Post Code</span></label
-                    >
-                  </div>
-                  <button id="btn_submit_postcode" class="btn btn_new_list">
-                    Find
-                  </button>
-                </form>
+                <div class="form_create_list">
+                  <input
+                    type="text"
+                    id="postcode_input"
+                    name="search"
+                    placeholder=""
+                    required
+                  />
+                  <label for="postcode" class="label_name"
+                    ><span class="label_text">Search for places</span></label
+                  >
+                </div>
               </div>
             </div>
           </div>

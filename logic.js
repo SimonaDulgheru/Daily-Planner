@@ -190,46 +190,92 @@ const weatherApiInfoLoader = callback => {
 //GOOGLE MAPS API
 var map, infoWindow;
 function initMap() {
-  let myLatLng = { lat: -25.363, lng: 131.044 };
-
-  map = new google.maps.Map(document.querySelector(".map_container"), {
-    center: myLatLng,
-    zoom: 9
-  });
-  infoWindow = new google.maps.InfoWindow();
-
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var myLatLng = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
 
-        infoWindow.setPosition(pos);
-        infoWindow.setContent("You are here.");
-        infoWindow.open(map);
-        map.setCenter(pos);
-      },
-      function() {
-        handleLocationError(true, infoWindow, map.getCenter());
-      }
-    );
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
+      map = new google.maps.Map(document.querySelector(".map_container"), {
+        center: myLatLng,
+        zoom: 9
+      });
+      // infoWindow = new google.maps.InfoWindow();
+
+      // if (navigator.geolocation) {
+      //   navigator.geolocation.getCurrentPosition(
+      //     function(position) {
+      //       var pos = {
+      //         lat: position.coords.latitude,
+      //         lng: position.coords.longitude
+      //       };
+
+      //       infoWindow.setPosition(pos);
+      //       infoWindow.setContent("You are here.");
+      //       infoWindow.open(map);
+      //       map.setCenter(pos);
+      //     },
+      //     function() {
+      //       handleLocationError(true, infoWindow, map.getCenter());
+      //     }
+      //   );
+      // } else {
+      //   // Browser doesn't support Geolocation
+      //   handleLocationError(false, infoWindow, map.getCenter());
+      // }
+
+      var input = document.querySelector("#postcode_input");
+      var searchBox = new google.maps.places.SearchBox(input);
+
+      map.addListener("bounds_changed", () => {
+        searchBox.setBounds(map.getBounds());
+      });
+
+      var markers = [];
+
+      searchBox.addListener("places_changed", () => {
+        var places = searchBox.getPlaces();
+
+        if (places.length === 0) return;
+
+        markers.forEach(m => {
+          m.setMap(null);
+        });
+        markers = [];
+
+        var bounds = new google.maps.LatLngBounds();
+
+        places.forEach(p => {
+          if (!p.geometry) return;
+          markers.push(
+            new google.maps.Marker({
+              map: map,
+              title: p.name,
+              position: p.geometry.location
+            })
+          );
+          if (p.geometry.viewport) {
+            bounds.union(p.geometry.viewport);
+          } else {
+            bounds.extend(p.geometry.location);
+          }
+        });
+        map.fitBounds(bounds);
+      });
+    });
   }
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
-}
+// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//   infoWindow.setPosition(pos);
+//   infoWindow.setContent(
+//     browserHasGeolocation
+//       ? "Error: The Geolocation service failed."
+//       : "Error: Your browser doesn't support geolocation."
+//   );
+//   infoWindow.open(map);
+// }
 
 //FETCH WITH UNSPLASH API
 const backgroundRender = query => {
@@ -296,8 +342,8 @@ const app = () => {
   const btnSubmitNewList = document.querySelector("#btn_submit_new_list");
   const taskNameInput = document.querySelector("#task_name_input");
   const btnSubmitNewTask = document.querySelector("#btn_submit_new_task");
-  const postcodeInput = document.querySelector("#postcode_input");
-  const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");
+  // const postcodeInput = document.querySelector("#postcode_input");
+  // const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");
 
   weatherApiInfoLoader(backgroundRender);
   greetingScreen();
@@ -311,7 +357,7 @@ const app = () => {
   goBackToListsFromTasks();
   btnSubmtitAnimationToggle(btnSubmitNewList, listNameInput);
   btnSubmtitAnimationToggle(btnSubmitNewTask, taskNameInput);
-  btnSubmtitAnimationToggle(btnSubmitNewPostcode, postcodeInput);
+  // btnSubmtitAnimationToggle(btnSubmitNewPostcode, postcodeInput);
 };
 
 app();
