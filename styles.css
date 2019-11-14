@@ -16,7 +16,15 @@ html {
   align-items: center;
 }
 
-.logo {
+
+.icon-logo {
+  margin:auto;
+  float:left;
+  width: 8%;
+  height: 10%;
+}
+
+ .logo {
   color: rgb(68, 4, 4);
   font-family: "Tangerine", cursive;
   font-weight: 700;
@@ -24,9 +32,9 @@ html {
   z-index: 10;
 }
 
-.logo i {
+/* .logo i {
   color: rgb(68, 4, 4);
-}
+} */ */
 
 /* NAVEGATION MENU */
 
@@ -154,9 +162,10 @@ body {
   position: absolute;
   bottom: 0.5em;
   left: 1em;
-  padding: 1.2em 1em;
+  padding: 0.5em 1em;
   background-color: rgba(68, 4, 4, 0.5);
   border-radius: 8px;
+  width: 25%;
 }
 
 .temperature {
@@ -165,6 +174,8 @@ body {
   font-size: 1.4em;
   font-weight: 100;
   color: white;
+  right: 0.5em;
+  margin-left: 5px;
 }
 
 .weather_description {
@@ -174,10 +185,13 @@ body {
   font-weight: 100;
   color: white;
   margin-top: 0.5em;
+  text-align: center;
 }
 
-.weather_icon img {
-  margin-top: 10px;
+.weather_icon img{
+  right: 1.5em;
+  position: absolute;
+  top: 0.1em;
   width: 2.4em;
 }
 
@@ -189,6 +203,7 @@ body {
   font-weight: 100;
   color: white;
   margin-top: 0.5em;
+  text-align: center;
 }
 
 .location_item {
