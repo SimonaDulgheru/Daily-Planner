@@ -196,71 +196,40 @@
         </div>
         <!-- SLIDER FOR PREFERRED LOCATION -->
         <div class="slider_container" locations_slider_container>
-          <div class="wrapper">
-            <h2 class="map_headings">
-              My Preferred Locations
-            </h2>
-
-            <div class="map_container">
-              <img
-                src="https://compote.slate.com/images/ff47615b-f476-4479-af98-add0a5255c80.jpeg?width=780&height=520&rect=1560x1040&offset=0x0"
-                alt=""
-                class="map_placeholder"
-              />
-            </div>
-
-            <ul class="saved_locations_list">
-              <li class="location_item">
-                Royal Leamington Spa<span class="delete_list"
-                  ><i class="fas fa-trash-alt"></i
-                ></span>
-              </li>
-              <li class="location_item" selected>
-                Coventry<span class="delete_list"
-                  ><i class="fas fa-trash-alt"></i
-                ></span>
-              </li>
-              <li class="location_item">
-                Birmingham<span class="delete_list"
-                  ><i class="fas fa-trash-alt"></i
-                ></span>
-              </li>
-            </ul>
-            <section class="weather_display">
-              <div class="temperature"></div>
-              <div class="weather_icon">
-                <img src="./icons/" alt="Weather icon" />
-              </div>
-
-              <span class="location"></span>
-
-              <p class="weather_description"></p>
-            </section>
-            <div class="action">
-              <button id="btn_new_location" class="action_btn">
-                <i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div id="postcode_modal" class="modal">
-            <div class="modal_content">
-              <div id="close_postcode_modal" class="close">
-                &times;
-              </div>
-              <div class="form_container">
-                <div class="form_create_list">
-                  <input
-                    type="text"
-                    id="postcode_input"
-                    name="search"
-                    placeholder=""
-                    required
-                  />
-                  <label for="postcode" class="label_name"
-                    ><span class="label_text">Search for places</span></label
-                  >
+          
+            <div class="pac-card" id="pac-card">
+              <div>
+                <div id="title">
+                  So... What are you looking for?
+                </div>
+                <div id="type-selector" class="pac-controls">
+                  <input type="radio" name="type" id="changetype-all" checked="checked">
+                  <label for="changetype-all">All</label>
+        
+                  <input type="radio" name="type" id="changetype-establishment">
+                  <label for="changetype-establishment">Establishments</label>
+        
+                  <input type="radio" name="type" id="changetype-address">
+                  <label for="changetype-address">Addresses</label>
+        
+                  <input type="radio" name="type" id="changetype-geocode">
+                  <label for="changetype-geocode">Geocodes</label>
+                </div>
+                <div id="strict-bounds-selector" class="pac-controls">
+                  <input type="checkbox" id="use-strict-bounds" value="">
+                  <label for="use-strict-bounds">Strict Bounds</label>
                 </div>
               </div>
+              <div id="pac-container">
+                <input id="pac-input" type="text"
+                    placeholder="Enter a place or location">
+              </div>
+            </div>
+            <div id="map"></div>
+            <div id="infowindow-content">
+              <img src="" width="16" height="16" id="place-icon">
+              <span id="place-name"  class="title"></span><br>
+              <span id="place-address"></span>
             </div>
           </div>
         </div>
