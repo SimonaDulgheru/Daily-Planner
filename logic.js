@@ -137,10 +137,10 @@ const weatherApiInfoLoader = callback => {
     //Get current location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        long = position.coords.longitude;
-        lat = position.coords.latitude;
+        longitude = position.coords.longitude;
+        latitude = position.coords.latitude;
 
-        const api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=fdc20835f2afc8721c378d891785f78d`;
+        const api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=fdc20835f2afc8721c378d891785f78d`;
 
         // Fetch API
         fetch(api)
@@ -186,6 +186,50 @@ const weatherApiInfoLoader = callback => {
     }
   });
 };
+
+//GOOGLE MAPS API
+var map, infoWindow;
+function initMap() {
+  let myLatLng = { lat: -25.363, lng: 131.044 };
+
+  map = new google.maps.Map(document.querySelector(".map_container"), {
+    center: myLatLng,
+    zoom: 9
+  });
+  infoWindow = new google.maps.InfoWindow();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        infoWindow.setPosition(pos);
+        infoWindow.setContent("You are here.");
+        infoWindow.open(map);
+        map.setCenter(pos);
+      },
+      function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}
 
 //FETCH WITH UNSPLASH API
 const backgroundRender = query => {
