@@ -101,8 +101,11 @@ const sliderListsToggle = () => {
 // ANIMATION FOR BUTTON SUBMIT NEW LIST NAME ON LISTS SCREEN
 const btnSubmtitAnimationToggle = (button, input) => {
   input.addEventListener("focus", () => {
-    button.classList.add("btn_submit");
+    console.log(input)
+;    button.classList.add("btn_submit");
   });
+
+  
   input.addEventListener("blur", () => {
     button.classList.remove("btn_submit");
   });
@@ -344,9 +347,9 @@ const app = () => {
   const closePostcodeModal = document.querySelector("#close_postcode_modal");
   const btnActionFindPostcode = document.querySelector("#btn_new_location");
 
-  const listNameInput = document.querySelector("#list_name_input");
+  const listNameInput = document.querySelector("#list_name_input").value;
   const btnSubmitNewList = document.querySelector("#btn_submit_new_list");
-  const taskNameInput = document.querySelector("#task_name_input");
+  const taskNameInput = document.querySelector("#task_name_input").value;
   const btnSubmitNewTask = document.querySelector("#btn_submit_new_task");
   // const postcodeInput = document.querySelector("#postcode_input");
   // const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");

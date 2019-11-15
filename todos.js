@@ -7,7 +7,7 @@ const listDisplayContainer = document.querySelector('[data-list-display-containe
 const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
 const taskContainer = document.querySelector('[data-tasks]')
-const taskTemplate = document.getElementById('task-template')
+const listTemplate = document.getElementById('list-of-list-template')
 const newTaskForm = document.querySelector('[data-new-task-form]')
 const newTaskInput = document.querySelector('[data-new-task-input]')
 
@@ -22,7 +22,17 @@ listContainer.addEventListener('click' , event => {
 if(event.target.tagName.toLowerCase() === 'li'){
     selectedListId = event.target.dataset.listId
     console.log(selectedListId)
-   // saveAndrender()
+
+    // prompt for new task
+   let task =  prompt("Add a task")
+   const selectedList = lists.find(list => list.id === selectedListId)
+   console.log(selectedList);
+    // add task to list in storage
+    selectedList.tasks.push(task)
+    // alert the task list
+    alert(selectedList.tasks)
+
+    saveAndrender()
 }
 })
 
@@ -36,13 +46,7 @@ if(event.target.tagName.toLowerCase() === 'li'){
 //     }
 // })
 //select all lists that not equal to the current list 
-// deleteListButton.addEventListener('click', event =>{
-//     list = lists.filter(list => {
-//         if (list.id !== selectedListId) {
-//             selectedListId = null
-//             saveAndrender();
-//         }})
-// })
+
 
 newListForm.addEventListener('submit', event => {
     event.preventDefault()
@@ -59,7 +63,7 @@ newListForm.addEventListener('submit', event => {
 //     if(taskName == null || taskName === '') return
 //     const task = createTask(taskName)
 //     newTaskInput.value = null
-//     const selectedList = lisr.find(list => list.id === selectedListId)
+//     const selectedList = list.find(list => list.id === selectedListId)
 //     selectedList.tasks.push(task)
 //     saveAndrender()
 // })
@@ -100,7 +104,7 @@ const selectedList = lists.find(list => list.id === selectedListId)
 
 function renderTask(selectedList){
     selectedList.task.forEach(task => {
-      const  taskElement = document.importNode(taskTemplate.content, true)
+      const  taskElement = listTemplate.cloneNode(true)
       const checkbox = taskElement.querySelector("input")
       checkbox.id = task.id
       checkbox.checked = task.complete
@@ -119,15 +123,30 @@ listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
 
 function renderListOfList(){
     lists.forEach(list => {
-        const listElement = document.createElement('li')
-        //to know which list is being selected from lists of list 
-        listElement.dataset.listId = list.id
-        listElement.classList.add("list-name")
+   
+        // //to know which list is being selected from lists of list 
+        // listElement.dataset.listId = list.id
+        // listElement.classList.add("li_frame")
+        console.log(document.getElementById('task_name_input').innerText);
+      const  listElement = document.importNode(listTemplate.content, true)
+
+      // query select on listElement to get the label
+      const listLabel = listElement.querySelector('listLabel')
+
+      // select input and give it the correct id
+        
+      // set label text as task name
+
+
+
+
+
+
     //prints out list name
-        listElement.innerText = list.name
-        if (list.id === selectedListId) {
-            listElement.classList.add('current-list')
-        }
+        // listElement.innerText = list.name
+        // if (list.id === selectedListId) {
+        //     listElement.classList.add('current-list')
+        // }
     // add to a list container
         listContainer.appendChild(listElement)
       })
