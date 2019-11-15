@@ -17,11 +17,12 @@ html {
 }
 
 
-.icon-logo {
+.logo-icon {
   margin:auto;
   float:left;
-  width: 8%;
-  height: 10%;
+  width: 1em;
+  height: 1em;
+  padding: 0.1em 0em;
 }
 
  .logo {
