@@ -15,26 +15,24 @@ html {
   justify-content: space-between;
   align-items: center;
 }
-
-
-.icon-logo {
+ .icon-logo{
+  width: 1em;
+  float: left;
   margin:auto;
-  float:left;
-  width: 8%;
-  height: 10%;
-}
+  top: 2%;
+  padding: 0.1em;
+} 
 
  .logo {
   color: rgb(68, 4, 4);
   font-family: "Tangerine", cursive;
   font-weight: 700;
-  font-size: 2.2em;
+  font-size: 2.5em;
+  left: 5%;
   z-index: 10;
+  left: 5%;
 }
 
-/* .logo i {
-  color: rgb(68, 4, 4);
-} */ */
 
 /* NAVEGATION MENU */
 
