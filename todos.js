@@ -23,6 +23,7 @@ let selectedListId = localStorage.getItem(localStorageSelectedListIdKey);
 listContainer.addEventListener("click", event => {
   if (event.target.tagName.toLowerCase() === "li") {
     clearElement(taskContainer);
+
     selectedListId = event.target.dataset.listId;
     const selectedListName = event.target.dataset.listName;
 
@@ -33,10 +34,27 @@ listContainer.addEventListener("click", event => {
     tasksSlider.style.transform = "translateX(0%)";
 
     //add list name to task heading
-
     let tasksHeading = document.querySelector("[tasks-heading]");
-    tasksHeading.innerText = `My Tasks from ${selectedListName} Lists`;
+    tasksHeading.innerText = `My Tasks from ${selectedListName} List`;
+    //renders tasks from selected list
+    const selectedList = lists.find(list => list.id === selectedListId);
+    renderTasksOfSelectedList(selectedList);
+  } else if (event.target.className == "list_name") {
+    let listClicked = event.target.parentElement.parentElement;
+    clearElement(taskContainer);
 
+    selectedListId = listClicked.dataset.listId;
+    const selectedListName = listClicked.dataset.listName;
+    const listsSlider = document.querySelector("[lists_slider_container]");
+    const tasksSlider = document.querySelector("[tasks_slider_container]");
+
+    listsSlider.style.transform = "translateX(-100%)";
+    tasksSlider.style.transform = "translateX(0%)";
+
+    //add list name to task heading
+    let tasksHeading = document.querySelector("[tasks-heading]");
+    tasksHeading.innerText = `My Tasks from ${selectedListName} List`;
+    //renders tasks from selected list
     const selectedList = lists.find(list => list.id === selectedListId);
     renderTasksOfSelectedList(selectedList);
   }
@@ -47,6 +65,8 @@ listContainer.addEventListener("click", event => {
 newListForm.addEventListener("submit", event => {
   event.preventDefault();
   const listName = newListInput.value;
+  const modalCreateList = document.querySelector("#list_creation_modal");
+  modalCreateList.style.display = "none";
   if (listName == null || listName === "") return;
   const list = createList(listName);
   newListInput.value = null;
@@ -57,6 +77,8 @@ newListForm.addEventListener("submit", event => {
 newTaskForm.addEventListener("submit", event => {
   event.preventDefault();
   const taskName = newTaskInput.value;
+  const modalCreateTask = document.querySelector("#task_creation_modal");
+  modalCreateTask.style.display = "none";
   if (taskName == null || taskName === "") return;
   const task = createTask(taskName);
   newTaskInput.value = null;
@@ -94,17 +116,21 @@ function render() {
 }
 
 function renderTasksOfSelectedList(selectedList) {
-  selectedList.tasks.forEach(task => {
-    console.log(task);
-    const taskElement = document.importNode(listTemplate.content, true);
-    const checkbox = taskElement.querySelector("input");
-    //checkbox.id = task.id
-    // checkbox.checked = task.complete;
-    const label = taskElement.querySelector("label");
-    label.htmlFor = task.id;
-    label.append(task.name);
-    taskContainer.appendChild(taskElement);
-  });
+  try {
+    selectedList.tasks.forEach(task => {
+      console.log(task);
+      const taskElement = document.importNode(listTemplate.content, true);
+      const checkbox = taskElement.querySelector("input");
+      //checkbox.id = task.id
+      // checkbox.checked = task.complete;
+      const label = taskElement.querySelector("label");
+      label.htmlFor = task.id;
+      label.append(task.name);
+      taskContainer.appendChild(taskElement);
+    });
+  } catch {
+    console.log("No tasks to show");
+  }
 }
 
 function renderListOfList() {
