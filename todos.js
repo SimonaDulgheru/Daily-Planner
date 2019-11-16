@@ -47,6 +47,8 @@ listContainer.addEventListener("click", event => {
 newListForm.addEventListener("submit", event => {
   event.preventDefault();
   const listName = newListInput.value;
+  const modalCreateList = document.querySelector("#list_creation_modal");
+  modalCreateList.style.display = "none";
   if (listName == null || listName === "") return;
   const list = createList(listName);
   newListInput.value = null;
@@ -57,6 +59,8 @@ newListForm.addEventListener("submit", event => {
 newTaskForm.addEventListener("submit", event => {
   event.preventDefault();
   const taskName = newTaskInput.value;
+  const modalCreateTask = document.querySelector("#task_creation_modal");
+  modalCreateTask.style.display = "none";
   if (taskName == null || taskName === "") return;
   const task = createTask(taskName);
   newTaskInput.value = null;
