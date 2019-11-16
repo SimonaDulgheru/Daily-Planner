@@ -46,10 +46,13 @@ const navSlidingEvent = () => {
   const locationsSlider = document.querySelector(
     "[locations_slider_container]"
   );
+  const aboutSlider = document.querySelector("[about_slider]");
+
   //List slider Closes and Main Nav Opens
   locationsSlider.style.transform = "translateX(-100%)";
   tasksSlider.style.transform = "translateX(-100%)";
   listsSlider.style.transform = "translateX(-100%)";
+  aboutSlider.style.transform = "translateX(-100%)";
   nav.classList.toggle("nav-active");
 
   //Animate Links from Main Navegation
@@ -69,15 +72,19 @@ const ulContentSliderAnimation = list => {
 // SLIDER SHOW
 const listSliderToggleEvent = () => {
   const listsSlider = document.querySelector("[lists_slider_container]");
-
   listsSlider.style.transform = "translateX(0%)";
 };
+
 const locationsSliderToggleEvent = () => {
   const locationsSlider = document.querySelector(
     "[locations_slider_container]"
   );
-
   locationsSlider.style.transform = "translateX(0%)";
+};
+
+const aboutLiToggleEvent = () => {
+  const aboutSlider = document.querySelector("[about_slider]");
+  aboutSlider.style.transform = "translateX(0%)";
 };
 
 //CLICKING LINKS TO SLIDERS ON MAIN NAVEGATION
@@ -85,6 +92,7 @@ const sliderListsToggle = () => {
   const listsSliderToggle = document.querySelector("[lists_slider_toggle]");
   const mapSliderToggle = document.querySelector("[map_slider_toggle]");
   const burger = document.querySelector(".burger");
+  const aboutLiToggle = document.querySelector("[about_slider_toggle]");
 
   listsSliderToggle.addEventListener("click", () => {
     navSlidingEvent();
@@ -96,7 +104,20 @@ const sliderListsToggle = () => {
     burger.classList.toggle("toggle");
     locationsSliderToggleEvent();
   });
+
+  aboutLiToggle.addEventListener("click", () => {
+    navSlidingEvent();
+    burger.classList.toggle("toggle");
+    aboutLiToggleEvent();
+  });
 };
+
+// // About Us Page JS link
+
+// const aboutUsPage = () => {
+//   const aboutLi = document.querySelector("[about_us]");
+//   aboutLi.addEventListener("click", () => {});
+// };
 
 // ANIMATION FOR BUTTON SUBMIT NEW LIST NAME ON LISTS SCREEN
 const btnSubmtitAnimationToggle = (button, input) => {

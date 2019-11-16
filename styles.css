@@ -15,15 +15,15 @@ html {
   justify-content: space-between;
   align-items: center;
 }
- .icon-logo{
-  width: 1em;
+.icon-logo {
+  width: 0.8em;
   float: left;
-  margin:auto;
+  margin: auto;
   top: 2%;
   padding: 0.1em;
-} 
+}
 
- .logo {
+.logo {
   color: rgb(68, 4, 4);
   font-family: "Tangerine", cursive;
   font-weight: 700;
@@ -32,7 +32,6 @@ html {
   z-index: 10;
   left: 5%;
 }
-
 
 /* NAVEGATION MENU */
 
@@ -163,7 +162,6 @@ body {
   padding: 0.5em 1em;
   background-color: rgba(68, 4, 4, 0.5);
   border-radius: 8px;
-  width: 25%;
 }
 
 .temperature {
@@ -186,7 +184,7 @@ body {
   text-align: center;
 }
 
-.weather_icon img{
+.weather_icon img {
   right: 1.5em;
   position: absolute;
   top: 0.1em;
@@ -586,6 +584,21 @@ input[type="checkbox"]:checked + label.list_name {
   border-radius: 6px 6px 0px 0px;
 }
 
+/*ABOUT SLIDER*/
+
+.wrapper {
+  margin-top: 3em;
+  padding: 0 20px;
+}
+
+.about_description {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1em;
+  color: white;
+  text-align: center;
+}
+
 /* MOBILE SPECIFIC */
 
 @media only screen and (max-width: 768px) {
@@ -597,5 +610,8 @@ input[type="checkbox"]:checked + label.list_name {
   }
   .pac-card {
     margin: 60px 10px 0px 10px;
+  }
+  .wrapper {
+    overflow-y: scroll;
   }
 }
