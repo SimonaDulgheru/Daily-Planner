@@ -6,7 +6,7 @@ const deleteListButton = document.querySelector('[data-delete-list-button]')
 const listDisplayContainer = document.querySelector('[data-list-display-container]')
 const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
-const taskContainer = document.querySelector('[data-tasks]')
+const taskContainer = document.querySelector('.todos_from_list')
 const listTemplate = document.getElementById('list-of-list-template')
 const newTaskForm = document.querySelector('.new-task-form')
 const newTaskInput = document.querySelector('#task_name_input')
@@ -32,14 +32,13 @@ listContainer.addEventListener('click' , event => {
         listsSlider.style.transform = "translateX(-100%)";
         tasksSlider.style.transform = "translateX(0%)";
        
-//add list name to task heading 
+        //add list name to task heading 
 
-  let tasksHeading =   document.querySelector('[tasks-heading]')
-  tasksHeading.innerText = (`My Tasks from ${selectedListName} Lists`)
-
-
-
-        
+        let tasksHeading =   document.querySelector('[tasks-heading]')
+        tasksHeading.innerText = (`My Tasks from ${selectedListName} Lists`)
+    }
+})
+       
     //     // prompt for new task
     // const selectedList = lists.find(list => list.id === selectedListId)
     //     console.log(selectedList);
@@ -49,13 +48,11 @@ listContainer.addEventListener('click' , event => {
     //         alert(selectedList.tasks)
 
     //         saveAndrender()
-     }
-})
 
 // taskContainer.addEventListener('click', event => {
 //     if(event.target.tagName.toLowerCase() === 'input'){
 //       const selectedList = lists.find(list => list.id === selectedListId)
-//       const selectedTask = selectedList.tasks.find(task => task.id === addEventListener.target.id)
+//       const selectedTask = selectedList.tasks.find(task => task.id === event.target.id)
 //       selectedTask.complete = event.target.checked
 //         save()
 //         renderTaskCount(selectedList)
@@ -108,30 +105,34 @@ function save(){
 function render () {
   clearElement (listContainer)  
   renderListOfList()
-//onst selectedList = lists.find(list => list.id === selectedListId)
-//   if(selectedListId == null){
-//       listDisplayContainer.style.display = 'none'
-//   }else{
-//     listDisplayContainer.style.display = ''
-//     listTitleElement.innerText = selectedList.name
-//     renderTaskCount(selectedList)
-//     clearElement(taskContainer)
-//     renderTask(selectedList)
-//   } 
- }
 
-// function renderTask(selectedList){
-//     selectedList.task.forEach(task => {
-//       const  taskElement = listTemplate.cloneNode(true)
-//       const checkbox = taskElement.querySelector("input")
-//       checkbox.id = task.id
-//       checkbox.checked = task.complete
-//       const label = taskElement.querySelector('label')
-//       label.htmlFor = task.id
-//       label.append(task.name)
-//       taskContainer.appendChild(taskElement)
-//     })
-//}
+    const selectedList = lists.find(list => list.id === selectedListId)
+        // if(selectedListId == null){
+        //     listDisplayContainer.style.display = 'none'
+        // }else{
+        //     listDisplayContainer.style.display = ''
+           // listTitleElement.innerText = selectedList.name
+            // renderTaskCount(selectedList)
+            clearElement(taskContainer)
+            renderTasksOfSelectedList(selectedList)
+    } 
+ //}
+
+    function renderTasksOfSelectedList(selectedList){
+        console.log(selectedList)
+        selectedList.tasks.forEach(task => {
+            const taskElement = document.importNode(listTemplate.content, true)
+            const checkbox = taskElement.querySelector("input")
+            //checkbox.id = task.id
+            checkbox.checked = task.complete
+            const label = taskElement.querySelector('label')
+            label.htmlFor = task.id
+            label.append(task.name)
+            taskContainer.appendChild(taskElement)
+        })
+    }
+
+
 // function renderTaskCount(selectedList){
 // const incompleteTaskCount = selectedList.tasks.filter(!task.complete).length
 // const taskString = incompleteTaskCount === 1 ? "task" :"tasks"
