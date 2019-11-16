@@ -8,6 +8,7 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My Daily Planner</title>
+    <link rel="shortcut icon" href="images/note.gif" type="gif" />
     <link
       href="https://fonts.googleapis.com/css?family=Tangerine:400,700&display=swap"
       rel="stylesheet"
@@ -27,10 +28,15 @@
     ></script>
   </head>
   <body>
-
     <div class="overlay"></div>
     <header class="header">
-      <h2 class="logo"><img class = "icon-logo" src="images/logo-3-mod.gif" alt = "Daily-Planner Logo">Daily Planner</h2>
+      <h2 class="logo">
+        <img
+          class="icon-logo"
+          src="images/note.gif"
+          alt="Daily-Planner Logo"
+        />Daily Planner
+      </h2>
       <div class="burger">
         <div class="line1"></div>
         <div class="line2"></div>
@@ -42,7 +48,7 @@
         <li remove_sliders>Home</li>
         <li lists_slider_toggle>My Lists of Tasks</li>
         <li map_slider_toggle>Prefered Locations</li>
-        <li about_slider_toggle>About</li>
+        <li about_slider_toggle about_us>About</li>
       </ul>
     </nav>
     <main>
@@ -53,7 +59,6 @@
           first List of Tasks.
         </p>
       </section>
-
 
       <section class="weather_display">
         <div class="temperature"></div>
@@ -230,6 +235,32 @@
         <img src="" width="16" height="16" id="place-icon" />
         <span id="place-name" class="title"></span><br />
         <span id="place-address"></span>
+      </div>
+    </div>
+
+    <!-- About Us Page -->
+    <div class="slider_container" about_slider>
+      <div class="wrapper">
+        <h2 class="lists_heading">
+          About this App
+        </h2>
+        <h3 class="lists_heading">Organize your To-dos for the day</h3>
+        <p class="about_description">
+          Organise your schedule with the best-in-class to-do list.<br />
+          Create Lists of Tasks and add as many tasks as you need for each List.
+        </p>
+        <h3 class="lists_heading">Check the weather at your location</h3>
+        <p class="about_description">
+          Check the temperature and weather conditions at your current
+          location.<br />
+          Get inspired with different background images loaded on the fly
+          according to the weather.
+        </p>
+        <h3 class="lists_heading">Find places in a map.</h3>
+        <p class="about_description">
+          With Google Maps Places Api, find any place you need with our
+          Auto-complete form and see its location in the map.
+        </p>
       </div>
     </div>
   </body>
