@@ -14,26 +14,43 @@ const newTaskInput = document.querySelector('[data-new-task-input]')
 //namespaces prevent overriding data in local storage OR preventing other websites from over riding data
 const localStorageListKey = 'task.lists'
 const localStorageSelectedListIdKey = 'task.selectedListId'
+
 // create a variable to hold a list which is stored in local browser and convert it into an object as its currently a string
 let lists = JSON.parse(localStorage.getItem(localStorageListKey)) || []
 let selectedListId = localStorage.getItem(localStorageSelectedListIdKey)
 
+
 listContainer.addEventListener('click' , event => {
-if(event.target.tagName.toLowerCase() === 'li'){
-    selectedListId = event.target.dataset.listId
-    console.log(selectedListId)
+    if(event.target.tagName.toLowerCase() === 'li'){
+        selectedListId = event.target.dataset.listId
+        const selectedListName = event.target.dataset.listName
+        console.log(event.target.dataset)
+        console.log(selectedListId)
+        const listsSlider = document.querySelector("[lists_slider_container]");
+        const tasksSlider = document.querySelector("[tasks_slider_container]");
+    
+        listsSlider.style.transform = "translateX(-100%)";
+        tasksSlider.style.transform = "translateX(0%)";
+       
+//add list name to task heading 
 
-    // prompt for new task
-   let task =  prompt("Add a task")
-   const selectedList = lists.find(list => list.id === selectedListId)
-   console.log(selectedList);
-    // add task to list in storage
-    selectedList.tasks.push(task)
-    // alert the task list
-    alert(selectedList.tasks)
+  let tasksHeading =   document.querySelector('[tasks-heading]')
+  tasksHeading.innerText = (`My Tasks from ${selectedListName} Lists`)
 
-    saveAndrender()
-}
+
+
+        
+    //     // prompt for new task
+    // let task =  prompt("Add a task")
+    // const selectedList = lists.find(list => list.id === selectedListId)
+    // console.log(selectedList);
+    //     // add task to list in storage
+    //     selectedList.tasks.push(task)
+    //     // alert the task list
+    //     alert(selectedList.tasks)
+
+    //     saveAndrender()
+    }
 })
 
 // taskContainer.addEventListener('click', event => {
@@ -90,7 +107,7 @@ function save(){
 function render () {
   clearElement (listContainer)  
   renderListOfList()
-const selectedList = lists.find(list => list.id === selectedListId)
+//onst selectedList = lists.find(list => list.id === selectedListId)
 //   if(selectedListId == null){
 //       listDisplayContainer.style.display = 'none'
 //   }else{
@@ -102,61 +119,65 @@ const selectedList = lists.find(list => list.id === selectedListId)
 //   } 
  }
 
-function renderTask(selectedList){
-    selectedList.task.forEach(task => {
-      const  taskElement = listTemplate.cloneNode(true)
-      const checkbox = taskElement.querySelector("input")
-      checkbox.id = task.id
-      checkbox.checked = task.complete
-      const label = taskElement.querySelector('label')
-      label.htmlFor = task.id
-      label.append(task.name)
-      taskContainer.appendChild(taskElement)
-    })
-}
-function renderTaskCount(selectedList){
-const incompleteTaskCount = selectedList.tasks.filter(!task.complete).length
-const taskString = incompleteTaskCount === 1 ? "task" :"tasks"
-//if more than one task this can be pluralised, before semi colon is true if id = to 1
-listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
-}
+// function renderTask(selectedList){
+//     selectedList.task.forEach(task => {
+//       const  taskElement = listTemplate.cloneNode(true)
+//       const checkbox = taskElement.querySelector("input")
+//       checkbox.id = task.id
+//       checkbox.checked = task.complete
+//       const label = taskElement.querySelector('label')
+//       label.htmlFor = task.id
+//       label.append(task.name)
+//       taskContainer.appendChild(taskElement)
+//     })
+//}
+// function renderTaskCount(selectedList){
+// const incompleteTaskCount = selectedList.tasks.filter(!task.complete).length
+// const taskString = incompleteTaskCount === 1 ? "task" :"tasks"
+// //if more than one task this can be pluralised, before semi colon is true if id = to 1
+// listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
+// }
 
 function renderListOfList(){
     lists.forEach(list => {
-   
+
         // //to know which list is being selected from lists of list 
         // listElement.dataset.listId = list.id
         // listElement.classList.add("li_frame")
         console.log(document.getElementById('task_name_input').innerText);
-      const  listElement = document.importNode(listTemplate.content, true)
+        const listElement = document.importNode(listTemplate.content, true)
+        console.log(list)
 
-      // query select on listElement to get the label
-      const listLabel = listElement.querySelector('listLabel')
-
-      // select input and give it the correct id
-        
-      // set label text as task name
-
+        // query select on listElement to get the label
+        const listLabel = listElement.querySelector('.list_name')
+        //add label to the list 
+        listLabel.innerText = list.name
 
 
+        // select input and give it the correct id
+        document.getElementById(selectedListId)
+        const listTag = listElement.querySelector('li')
+
+        console.log(listElement)
+        listTag.dataset.listId = list.id
+        listTag.dataset.listName = list.name
+
+
+        // set label text as task name
 
 
 
-    //prints out list name
-        // listElement.innerText = list.name
-        // if (list.id === selectedListId) {
-        //     listElement.classList.add('current-list')
-        // }
-    // add to a list container
+        // add to a list container
         listContainer.appendChild(listElement)
-      })
+    })
 }
 
-//clear existing elements
-function clearElement (element){
-while(element.firstChild){
-    element.removeChild(element.firstChild)
+    //clear existing elements
+    function clearElement(element ){
+        while(element.firstChild) {
+            element.removeChild(element.firstChild)
+        }
+       
     }
-}
 
-render()
+    render()

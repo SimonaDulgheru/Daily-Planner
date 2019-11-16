@@ -111,18 +111,18 @@ const btnSubmtitAnimationToggle = (button, input) => {
   });
 };
 
-//OPENING SLIDER WITH TASKS FROM A LIST
-const tasksFromList = () => {
-  const list = document.querySelector("[list_id_0] div label");
+// //OPENING SLIDER WITH TASKS FROM A LIST
+// const tasksFromList = () => {
+//   const list = document.querySelector('#list label');
 
-  list.addEventListener("click", () => {
-    const listsSlider = document.querySelector("[lists_slider_container]");
-    const tasksSlider = document.querySelector("[tasks_slider_container]");
+//   list.addEventListener("click", () => {
+//     const listsSlider = document.querySelector("[lists_slider_container]");
+//     const tasksSlider = document.querySelector("[tasks_slider_container]");
 
-    listsSlider.style.transform = "translateX(-100%)";
-    tasksSlider.style.transform = "translateX(0%)";
-  });
-};
+//     listsSlider.style.transform = "translateX(-100%)";
+//     tasksSlider.style.transform = "translateX(0%)";
+//   });
+// };
 
 //LOADING THE WEATHER API INFO ON HOME PAGE
 const weatherApiInfoLoader = callback => {
