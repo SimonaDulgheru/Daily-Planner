@@ -8,8 +8,8 @@ const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
 const taskContainer = document.querySelector('[data-tasks]')
 const listTemplate = document.getElementById('list-of-list-template')
-const newTaskForm = document.querySelector('[data-new-task-form]')
-const newTaskInput = document.querySelector('[data-new-task-input]')
+const newTaskForm = document.querySelector('.new-task-form')
+const newTaskInput = document.querySelector('#task_name_input')
 
 //namespaces prevent overriding data in local storage OR preventing other websites from over riding data
 const localStorageListKey = 'task.lists'
@@ -41,16 +41,15 @@ listContainer.addEventListener('click' , event => {
 
         
     //     // prompt for new task
-    // let task =  prompt("Add a task")
     // const selectedList = lists.find(list => list.id === selectedListId)
-    // console.log(selectedList);
-    //     // add task to list in storage
-    //     selectedList.tasks.push(task)
-    //     // alert the task list
-    //     alert(selectedList.tasks)
+    //     console.log(selectedList);
+    //         // add task to list in storage
+    //         selectedList.tasks.push(task)
+    //         // alert the task list
+    //         alert(selectedList.tasks)
 
-    //     saveAndrender()
-    }
+    //         saveAndrender()
+     }
 })
 
 // taskContainer.addEventListener('click', event => {
@@ -74,16 +73,18 @@ newListForm.addEventListener('submit', event => {
     lists.push(list)
     saveAndrender()
 })
-// newTaskForm.addEventListener('submit', event => {
-//     event.preventDefault()
-//     const taskName = newTaskInput.value
-//     if(taskName == null || taskName === '') return
-//     const task = createTask(taskName)
-//     newTaskInput.value = null
-//     const selectedList = list.find(list => list.id === selectedListId)
-//     selectedList.tasks.push(task)
-//     saveAndrender()
-// })
+
+newTaskForm.addEventListener('submit', event => {
+    event.preventDefault()
+    console.log(event)
+    const taskName = newTaskInput.value
+    if(taskName == null || taskName === '') return
+    const task = createTask(taskName)
+    newTaskInput.value = null
+    const selectedList = lists.find(list => list.id === selectedListId)
+    selectedList.tasks.push(task)
+    saveAndrender()
+})
 
 function createTask(name){
     return {id: Date.now().toString(), name:name, complete: false }
