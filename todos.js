@@ -1,4 +1,3 @@
-console.log('todos.js')
 const listContainer = document.querySelector('#list-of-list')
 const newListForm = document.querySelector('#list-of-list-form')
 const newListInput = document.querySelector('#list_name_input')
@@ -20,51 +19,32 @@ let lists = JSON.parse(localStorage.getItem(localStorageListKey)) || []
 let selectedListId = localStorage.getItem(localStorageSelectedListIdKey)
 
 
-listContainer.addEventListener('click' , event => {
-    if(event.target.tagName.toLowerCase() === 'li'){
+listContainer.addEventListener('click', event => {
+    if (event.target.tagName.toLowerCase() === 'li') {
         selectedListId = event.target.dataset.listId
         const selectedListName = event.target.dataset.listName
-        console.log(event.target.dataset)
-        console.log(selectedListId)
+        
         const listsSlider = document.querySelector("[lists_slider_container]");
         const tasksSlider = document.querySelector("[tasks_slider_container]");
-    
+
         listsSlider.style.transform = "translateX(-100%)";
         tasksSlider.style.transform = "translateX(0%)";
-       
+
         //add list name to task heading 
 
-        let tasksHeading =   document.querySelector('[tasks-heading]')
+        let tasksHeading = document.querySelector('[tasks-heading]')
         tasksHeading.innerText = (`My Tasks from ${selectedListName} Lists`)
     }
 })
-       
-    //     // prompt for new task
-    // const selectedList = lists.find(list => list.id === selectedListId)
-    //     console.log(selectedList);
-    //         // add task to list in storage
-    //         selectedList.tasks.push(task)
-    //         // alert the task list
-    //         alert(selectedList.tasks)
 
-    //         saveAndrender()
 
-// taskContainer.addEventListener('click', event => {
-//     if(event.target.tagName.toLowerCase() === 'input'){
-//       const selectedList = lists.find(list => list.id === selectedListId)
-//       const selectedTask = selectedList.tasks.find(task => task.id === event.target.id)
-//       selectedTask.complete = event.target.checked
-//         save()
-//         renderTaskCount(selectedList)
-//     }
-// })
 //select all lists that not equal to the current list 
 
 
 newListForm.addEventListener('submit', event => {
     event.preventDefault()
     const listName = newListInput.value
-    if(listName == null || listName === '') return
+    if (listName == null || listName === '') return
     const list = createList(listName)
     newListInput.value = null
     lists.push(list)
@@ -73,9 +53,8 @@ newListForm.addEventListener('submit', event => {
 
 newTaskForm.addEventListener('submit', event => {
     event.preventDefault()
-    console.log(event)
     const taskName = newTaskInput.value
-    if(taskName == null || taskName === '') return
+    if (taskName == null || taskName === '') return
     const task = createTask(taskName)
     newTaskInput.value = null
     const selectedList = lists.find(list => list.id === selectedListId)
@@ -83,72 +62,53 @@ newTaskForm.addEventListener('submit', event => {
     saveAndrender()
 })
 
-function createTask(name){
-    return {id: Date.now().toString(), name:name, complete: false }
+function createTask(name) {
+    return { id: Date.now().toString(), name: name, complete: false }
 }
 //create a function to capture name and task in local time and convert to string
-function createList(name){
-    return {id: Date.now().toString(), name:name, tasks: [] }
+function createList(name) {
+    return { id: Date.now().toString(), name: name, tasks: [] }
 }
-console.log(name)
 
-function saveAndrender(){
+function saveAndrender() {
     save()
     render()
 }
-function save(){
+function save() {
     localStorage.setItem(localStorageListKey, JSON.stringify(lists))
     localStorage.setItem(localStorageSelectedListIdKey, selectedListId)
 }
 
 //render and identify the list 
-function render () {
-  clearElement (listContainer)  
-  renderListOfList()
+function render() {
+    clearElement(listContainer)
+    renderListOfList()
 
     const selectedList = lists.find(list => list.id === selectedListId)
-        // if(selectedListId == null){
-        //     listDisplayContainer.style.display = 'none'
-        // }else{
-        //     listDisplayContainer.style.display = ''
-           // listTitleElement.innerText = selectedList.name
-            // renderTaskCount(selectedList)
-            clearElement(taskContainer)
-            renderTasksOfSelectedList(selectedList)
-    } 
- //}
-
-    function renderTasksOfSelectedList(selectedList){
-        console.log(selectedList)
-        selectedList.tasks.forEach(task => {
-            const taskElement = document.importNode(listTemplate.content, true)
-            const checkbox = taskElement.querySelector("input")
-            //checkbox.id = task.id
-            checkbox.checked = task.complete
-            const label = taskElement.querySelector('label')
-            label.htmlFor = task.id
-            label.append(task.name)
-            taskContainer.appendChild(taskElement)
-        })
-    }
+    clearElement(taskContainer)
+    renderTasksOfSelectedList(selectedList)
+}
 
 
-// function renderTaskCount(selectedList){
-// const incompleteTaskCount = selectedList.tasks.filter(!task.complete).length
-// const taskString = incompleteTaskCount === 1 ? "task" :"tasks"
-// //if more than one task this can be pluralised, before semi colon is true if id = to 1
-// listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
-// }
+function renderTasksOfSelectedList(selectedList) {
+    selectedList.tasks.forEach(task => {
+        const taskElement = document.importNode(listTemplate.content, true)
+        const checkbox = taskElement.querySelector("input")
+        //checkbox.id = task.id
+        checkbox.checked = task.complete
+        const label = taskElement.querySelector('label')
+        label.htmlFor = task.id
+        label.append(task.name)
+        taskContainer.appendChild(taskElement)
+    })
+}
 
-function renderListOfList(){
+
+function renderListOfList() {
     lists.forEach(list => {
 
         // //to know which list is being selected from lists of list 
-        // listElement.dataset.listId = list.id
-        // listElement.classList.add("li_frame")
-        console.log(document.getElementById('task_name_input').innerText);
         const listElement = document.importNode(listTemplate.content, true)
-        console.log(list)
 
         // query select on listElement to get the label
         const listLabel = listElement.querySelector('.list_name')
@@ -160,13 +120,9 @@ function renderListOfList(){
         document.getElementById(selectedListId)
         const listTag = listElement.querySelector('li')
 
-        console.log(listElement)
+        // set label text as task name
         listTag.dataset.listId = list.id
         listTag.dataset.listName = list.name
-
-
-        // set label text as task name
-
 
 
         // add to a list container
@@ -174,12 +130,12 @@ function renderListOfList(){
     })
 }
 
-    //clear existing elements
-    function clearElement(element ){
-        while(element.firstChild) {
-            element.removeChild(element.firstChild)
-        }
-       
+//clear existing elements
+function clearElement(element) {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild)
     }
 
-    render()
+}
+
+render()
