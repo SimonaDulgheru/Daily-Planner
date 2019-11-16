@@ -21,7 +21,10 @@ let lists = JSON.parse(localStorage.getItem(localStorageListKey)) || [];
 let selectedListId = localStorage.getItem(localStorageSelectedListIdKey);
 
 listContainer.addEventListener("click", event => {
-  if (event.target.tagName.toLowerCase() === "li") {
+  if (
+    event.target.tagName.toLowerCase() === "li" ||
+    event.target.className == "list_name"
+  ) {
     clearElement(taskContainer);
     selectedListId = event.target.dataset.listId;
     const selectedListName = event.target.dataset.listName;
