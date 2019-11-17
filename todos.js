@@ -6,7 +6,7 @@ const listDisplayContainer = document.querySelector(
   "[data-list-display-container]"
 );
 const listTitleElement = document.querySelector("[data-list-title]");
-const listCountElement = document.querySelector("[data-list-count]");
+// const listCountElement = document.querySelector("[data-list-count]");
 const taskContainer = document.querySelector(".todos_from_list");
 const listTemplate = document.getElementById("list-of-list-template");
 const taskTemplate = document.getElementById("list-of-tasks-template");
@@ -91,11 +91,11 @@ newTaskForm.addEventListener("submit", event => {
 taskContainer.addEventListener("click", event => {
   if (event.target.tagName.toLowerCase() === "input") {
     const selectedList = lists.find(list => list.id === selectedListId);
-    console.log(selectedList);
+
     const selectedTask = selectedList.tasks.find(
       task => task.id === event.target.id
     );
-    console.log(selectedTask);
+
     selectedTask.complete = event.target.checked;
     saveAndrender();
   }
@@ -126,7 +126,6 @@ function render() {
   const selectedList = lists.find(list => list.id === selectedListId);
   clearElement(taskContainer);
   renderTasksOfSelectedList(selectedList);
-  console.log(selectedList);
 }
 
 function renderTasksOfSelectedList(selectedList) {
@@ -162,9 +161,16 @@ function renderListOfList() {
     document.getElementById(selectedListId);
     const listTag = listElement.querySelector("li");
 
-    // set label text as task name
+    // set paragrapg text as task name
     listTag.dataset.listId = list.id;
     listTag.dataset.listName = list.name;
+
+    //update task count from list
+    const incompleteTaskCount = list.tasks.filter(task => !task.complete)
+      .length;
+    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+    const listCountElement = listElement.querySelector("[data-list-count]");
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
 
     // add to a list container
     listContainer.appendChild(listElement);

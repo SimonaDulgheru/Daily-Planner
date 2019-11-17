@@ -71,7 +71,7 @@
         <p class="weather_description"></p>
       </section>
     </main>
-    <!-- SLIDER SCREEN FOR LISTS OF TASKS -->
+    <!-- SLIDER SCREEN FOR LISTS OF LISTS -->
     <div class="slider_container" lists_slider_container>
       <div class="wrapper">
         <h2 class="lists_heading">
@@ -232,8 +232,8 @@
         <div class="input_container">
           <p class="list_name"></p>
         </div>
-        <div>
-          <span class="task_count">0 tasks</span>
+        <div class="list_info">
+          <span class="task_count" data-list-count>0 tasks</span>
           <span class="delete_list" data_delete_list_btn
             ><i class="fas fa-trash-alt"></i
           ></span>
@@ -241,7 +241,7 @@
       </li>
     </template>
     <template id="list-of-tasks-template">
-      <li class="li_frame">
+      <li class="task_frame">
         <div class="input_container">
           <input type="checkbox" class="list_checkbox" />
           <label class="list_name"></label>
