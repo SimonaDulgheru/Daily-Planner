@@ -9,6 +9,7 @@ const listTitleElement = document.querySelector("[data-list-title]");
 const listCountElement = document.querySelector("[data-list-count]");
 const taskContainer = document.querySelector(".todos_from_list");
 const listTemplate = document.getElementById("list-of-list-template");
+const taskTemplate = document.getElementById("list-of-tasks-template");
 const newTaskForm = document.querySelector(".new-task-form");
 const newTaskInput = document.querySelector("#task_name_input");
 
@@ -33,7 +34,7 @@ listContainer.addEventListener("click", event => {
     listsSlider.style.transform = "translateX(-100%)";
     tasksSlider.style.transform = "translateX(0%)";
 
-    //add list name to task heading
+    //add list name to tasks heading
     let tasksHeading = document.querySelector("[tasks-heading]");
     tasksHeading.innerText = `My Tasks from ${selectedListName} List`;
     //renders tasks from selected list
@@ -87,6 +88,19 @@ newTaskForm.addEventListener("submit", event => {
   saveAndrender();
 });
 
+taskContainer.addEventListener("click", event => {
+  if (event.target.tagName.toLowerCase() === "input") {
+    const selectedList = lists.find(list => list.id === selectedListId);
+    console.log(selectedList);
+    const selectedTask = selectedList.tasks.find(
+      task => task.id === event.target.id
+    );
+    console.log(selectedTask);
+    selectedTask.complete = event.target.checked;
+    saveAndrender();
+  }
+});
+
 function createTask(name) {
   return { id: Date.now().toString(), name: name, complete: false };
 }
@@ -119,10 +133,11 @@ function renderTasksOfSelectedList(selectedList) {
   try {
     selectedList.tasks.forEach(task => {
       console.log(task);
-      const taskElement = document.importNode(listTemplate.content, true);
+      const taskElement = document.importNode(taskTemplate.content, true);
       const checkbox = taskElement.querySelector("input");
-      //checkbox.id = task.id
-      // checkbox.checked = task.complete;
+      checkbox.id = task.id;
+      checkbox.checked = task.complete;
+
       const label = taskElement.querySelector("label");
       label.htmlFor = task.id;
       label.append(task.name);

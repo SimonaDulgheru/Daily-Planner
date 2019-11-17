@@ -77,23 +77,7 @@
         <h2 class="lists_heading">
           My Lists
         </h2>
-        <ul id="list-of-list" class="list_of_lists">
-          <!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
-          <li class="li_frame" list_id_0>
-            <div class="input_container">
-              <input type="checkbox" id="list1" class="list_checkbox" />
-              <label id="for_list1" class="list_name"></label>
-            </div>
-            <span class="delete_list"><i class="fas fa-trash-alt"></i></span>
-          </li>
-          <li class="li_frame">
-            <div class="input_container">
-              <input type="checkbox" id="list2" class="list_checkbox" />
-              <label id="for_list2" class="list_name"></label>
-            </div>
-            <span class="delete_list"><i class="fas fa-trash-alt"></i></span>
-          </li>
-        </ul>
+        <ul id="list-of-list" class="list_of_lists"></ul>
       </div>
       <div class="action">
         <button id="btn_new_list" class="action_btn">
@@ -133,25 +117,7 @@
         <h2 class="lists_heading" tasks-heading>
           My Tasks from Variable List
         </h2>
-        <ul class="todos_from_list">
-          <!-- HARDCODED LISTS TO SHOW EXAMPLE, SELECTORS, STYLES AND EXPECTEDED BEHAVIOUR -->
-          <li class="li_frame">
-            <div class="input_container">
-              <input type="checkbox" id="task1" class="task_checkbox" />
-              <label id="for_task1" class="list_name">TASK 1</label>
-            </div>
-            <span class="delete_list"><i class="fas fa-trash-alt"></i></span>
-          </li>
-          <li class="li_frame">
-            <div class="input_container">
-              <input type="checkbox" id="task2" class="task_checkbox" />
-              <label id="for_task2" class="list_name"
-                >TASK 2 snlscnlwcwc jkcnwcwlc cnwlmclw</label
-              >
-            </div>
-            <span class="delete_list"><i class="fas fa-trash-alt"></i></span>
-          </li>
-        </ul>
+        <ul class="todos_from_list"></ul>
         <div class="btn_wrapper">
           <button type="button" class="btn btn_standard" btn_go_back>
             Back to Lists
@@ -264,10 +230,25 @@
     <template id="list-of-list-template">
       <li class="li_frame">
         <div class="input_container">
-          <input type="checkbox" id="list" class="list_checkbox" />
-          <label for="for_list2" class="list_name"></label>
+          <p class="list_name"></p>
         </div>
-        <span class="delete_list"><i class="fas fa-trash-alt"></i></span>
+        <div>
+          <span class="task_count">0 tasks</span>
+          <span class="delete_list" data_delete_list_btn
+            ><i class="fas fa-trash-alt"></i
+          ></span>
+        </div>
+      </li>
+    </template>
+    <template id="list-of-tasks-template">
+      <li class="li_frame">
+        <div class="input_container">
+          <input type="checkbox" class="list_checkbox" />
+          <label class="list_name"></label>
+        </div>
+        <span class="delete_list" data_delete_task_btn
+          ><i class="fas fa-trash-alt"></i
+        ></span>
       </li>
     </template>
     <script src="todos.js"></script>
