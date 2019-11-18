@@ -144,70 +144,70 @@ const btnSubmtitAnimationToggle = (button, input) => {
 // };
 
 //LOADING THE WEATHER API INFO ON HOME PAGE
-const weatherApiInfoLoader = callback => {
-  window.addEventListener(`load`, () => {
-    // Fetch variables from html
-    let long;
-    let lat;
-    const weatherDisplay = document.querySelector(`.weather_display`);
+// const weatherApiInfoLoader = callback => {
+//   window.addEventListener(`load`, () => {
+//     // Fetch variables from html
+//     let long;
+//     let lat;
+//     const weatherDisplay = document.querySelector(`.weather_display`);
 
-    let location = document.querySelector(`.location, span`);
-    let temp = document.querySelector(`.temperature`);
-    let tempDescription = document.querySelector(`.weather_description`);
-    let icon = document.querySelector(`.weather_icon`);
+//     let location = document.querySelector(`.location, span`);
+//     let temp = document.querySelector(`.temperature`);
+//     let tempDescription = document.querySelector(`.weather_description`);
+//     let icon = document.querySelector(`.weather_icon`);
 
-    //Get current location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        longitude = position.coords.longitude;
-        latitude = position.coords.latitude;
+//     //Get current location
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(position => {
+//         longitude = position.coords.longitude;
+//         latitude = position.coords.latitude;
 
-        const api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=fdc20835f2afc8721c378d891785f78d`;
+//         const api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=fdc20835f2afc8721c378d891785f78d`;
 
-        // Fetch API
-        fetch(api)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
+//         // Fetch API
+//         fetch(api)
+//           .then(response => response.json())
+//           .then(data => {
+//             console.log(data);
 
-            //Display temperature
-            const temperature = data.main.temp;
-            const celsius = Math.floor(temperature - 273.15);
-            temp.textContent = `${celsius}°C`;
-            console.log(temperature);
+//             //Display temperature
+//             const temperature = data.main.temp;
+//             const celsius = Math.floor(temperature - 273.15);
+//             temp.textContent = `${celsius}°C`;
+//             console.log(temperature);
 
-            //Display temperature description
-            tempDescription.textContent = data.weather[0].main;
-            console.log(tempDescription);
-            weatherDisplay.appendChild(tempDescription);
+//             //Display temperature description
+//             tempDescription.textContent = data.weather[0].main;
+//             console.log(tempDescription);
+//             weatherDisplay.appendChild(tempDescription);
 
-            //update background image accordingly
-            // const bodyBackground = document.querySelector("body");
-            const urlWeatherParameter = tempDescription.innerText;
+//             //update background image accordingly
+//             // const bodyBackground = document.querySelector("body");
+//             const urlWeatherParameter = tempDescription.innerText;
 
-            // bodyBackground.style.backgroundImage = `url(https://source.unsplash.com/random/720×960/?${urlWeatherParameter})`;
-            callback(urlWeatherParameter);
-            //Display location
-            location.textContent = data.name;
-            weatherDisplay.appendChild(location);
+//             // bodyBackground.style.backgroundImage = `url(https://source.unsplash.com/random/720×960/?${urlWeatherParameter})`;
+//             callback(urlWeatherParameter);
+//             //Display location
+//             location.textContent = data.name;
+//             weatherDisplay.appendChild(location);
 
-            //Display icon
-            // let image = document.createElement(`img`);
-            iconId = data.weather[0].icon;
-            // icon.setAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`);
-            // icon.getAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`) ;
+//             //Display icon
+//             // let image = document.createElement(`img`);
+//             iconId = data.weather[0].icon;
+//             // icon.setAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`);
+//             // icon.getAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`) ;
 
-            // iconId.textContent = icon;
-            icon.innerHTML = `<img src = "icons/${iconId}.png"/>`;
+//             // iconId.textContent = icon;
+//             icon.innerHTML = `<img src = "icons/${iconId}.png"/>`;
 
-            weatherDisplay.appendChild(icon);
+//             weatherDisplay.appendChild(icon);
 
-            console.log(icon);
-          });
-      });
-    }
-  });
-};
+//             console.log(icon);
+//           });
+//       });
+//     }
+//   });
+// };
 
 //GOOGLE MAPS API
 
@@ -369,7 +369,7 @@ const app = () => {
   // const postcodeInput = document.querySelector("#postcode_input");
   // const btnSubmitNewPostcode = document.querySelector("#btn_submit_postcode");
 
-  weatherApiInfoLoader(backgroundRender);
+  // weatherApiInfoLoader(backgroundRender);
   greetingScreen();
   navSlide();
   sliderListsToggle();

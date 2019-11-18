@@ -6,9 +6,10 @@ const listDisplayContainer = document.querySelector(
   "[data-list-display-container]"
 );
 const listTitleElement = document.querySelector("[data-list-title]");
-const listCountElement = document.querySelector("[data-list-count]");
+// const listCountElement = document.querySelector("[data-list-count]");
 const taskContainer = document.querySelector(".todos_from_list");
 const listTemplate = document.getElementById("list-of-list-template");
+const taskTemplate = document.getElementById("list-of-tasks-template");
 const newTaskForm = document.querySelector(".new-task-form");
 const newTaskInput = document.querySelector("#task_name_input");
 
@@ -33,7 +34,7 @@ listContainer.addEventListener("click", event => {
     listsSlider.style.transform = "translateX(-100%)";
     tasksSlider.style.transform = "translateX(0%)";
 
-    //add list name to task heading
+    //add list name to tasks heading
     let tasksHeading = document.querySelector("[tasks-heading]");
     tasksHeading.innerText = `My Tasks from ${selectedListName} List`;
     //renders tasks from selected list
@@ -57,6 +58,7 @@ listContainer.addEventListener("click", event => {
     //renders tasks from selected list
     const selectedList = lists.find(list => list.id === selectedListId);
     renderTasksOfSelectedList(selectedList);
+    console.log(selectedListName);
   }
 });
 
@@ -87,6 +89,19 @@ newTaskForm.addEventListener("submit", event => {
   saveAndrender();
 });
 
+taskContainer.addEventListener("click", event => {
+  if (event.target.tagName.toLowerCase() === "input") {
+    const selectedList = lists.find(list => list.id === selectedListId);
+
+    const selectedTask = selectedList.tasks.find(
+      task => task.id === event.target.id
+    );
+
+    selectedTask.complete = event.target.checked;
+    saveAndrender();
+  }
+});
+
 function createTask(name) {
   return { id: Date.now().toString(), name: name, complete: false };
 }
@@ -112,21 +127,27 @@ function render() {
   const selectedList = lists.find(list => list.id === selectedListId);
   clearElement(taskContainer);
   renderTasksOfSelectedList(selectedList);
-  console.log(selectedList);
 }
 
 function renderTasksOfSelectedList(selectedList) {
   try {
     selectedList.tasks.forEach(task => {
       console.log(task);
-      const taskElement = document.importNode(listTemplate.content, true);
+      const taskElement = document.importNode(taskTemplate.content, true);
       const checkbox = taskElement.querySelector("input");
-      //checkbox.id = task.id
-      // checkbox.checked = task.complete;
+      checkbox.id = task.id;
+      checkbox.checked = task.complete;
+
       const label = taskElement.querySelector("label");
       label.htmlFor = task.id;
       label.append(task.name);
+
+      const deleteButton = taskElement.querySelector("span i");
+      deleteButton.dataset.deleteId = task.id;
+
       taskContainer.appendChild(taskElement);
+
+      deletingTasks();
     });
   } catch {
     console.log("No tasks to show");
@@ -147,12 +168,24 @@ function renderListOfList() {
     document.getElementById(selectedListId);
     const listTag = listElement.querySelector("li");
 
-    // set label text as task name
+    // set paragrapg text as task name
     listTag.dataset.listId = list.id;
     listTag.dataset.listName = list.name;
 
+    //add a data atribute to delete butun
+    const deleteButton = listElement.querySelector("span i");
+    deleteButton.dataset.deleteId = list.id;
+
+    //update task count from list
+    const incompleteTaskCount = list.tasks.filter(task => !task.complete)
+      .length;
+    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+    const listCountElement = listElement.querySelector("[data-list-count]");
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
+
     // add to a list container
     listContainer.appendChild(listElement);
+    deletingLists();
   });
 }
 
@@ -163,4 +196,51 @@ function clearElement(element) {
   }
 }
 
+// delete list
+
+const deletingLists = () => {
+  let deleteButtons = document
+    .querySelector("#list-of-list")
+    .querySelectorAll("i");
+
+  for (let i = 0; i < deleteButtons.length; i++) {
+    let deleteButton = deleteButtons[i];
+
+    // <li> onclick, runAlert function
+    deleteButton.onclick = deleteList;
+  }
+};
+
+function deleteList() {
+  let myList = this.getAttribute("data-delete-id");
+  lists = lists.filter(list => list.id != myList);
+  saveAndrender();
+  deletingLists();
+}
+
+//delete task
+
+const deletingTasks = () => {
+  let deleteButtons = document
+    .querySelector(".todos_from_list")
+    .querySelectorAll("i");
+
+  for (let i = 0; i < deleteButtons.length; i++) {
+    let deleteButton = deleteButtons[i];
+
+    // <li> onclick, runAlert function
+    deleteButton.onclick = deleteTask;
+  }
+};
+
+function deleteTask() {
+  let myTask = this.getAttribute("data-delete-id");
+  const selectedList = lists.find(list => list.id === selectedListId);
+  selectedList.tasks = selectedList.tasks.filter(task => task.id != myTask);
+  saveAndrender();
+  deletingTasks();
+}
+
 render();
+deletingLists();
+deletingTasks();

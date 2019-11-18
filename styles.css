@@ -358,8 +358,7 @@ body {
 }
 
 #list_name_input,
-#task_name_input,
-#postcode_input {
+#task_name_input {
   width: 100%;
   height: 100%;
   color: #595f6e;
@@ -448,7 +447,12 @@ body {
   margin-top: 60px;
 }
 
-.li_frame {
+.wrapper {
+  overflow-y: scroll;
+}
+
+.li_frame,
+.task_frame {
   list-style: none;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -469,6 +473,11 @@ body {
   text-transform: uppercase;
 }
 
+.li_frame {
+  flex-direction: column;
+  overflow-x: scroll;
+}
+
 .list_name {
   cursor: pointer;
 }
@@ -480,6 +489,20 @@ body {
 .li_frame:hover {
   width: 91%;
   box-shadow: 4px 4px 10px rgb(68, 4, 4);
+}
+
+.list_info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task_count {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 0.8em;
+  color: white;
+  font-weight: 100;
+  margin-right: 10px;
 }
 
 .delete_list:hover {
@@ -610,8 +633,5 @@ input[type="checkbox"]:checked + label.list_name {
   }
   .pac-card {
     margin: 60px 10px 0px 10px;
-  }
-  .wrapper {
-    overflow-y: scroll;
   }
 }
