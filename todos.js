@@ -58,6 +58,7 @@ listContainer.addEventListener("click", event => {
     //renders tasks from selected list
     const selectedList = lists.find(list => list.id === selectedListId);
     renderTasksOfSelectedList(selectedList);
+    console.log(selectedListName);
   }
 });
 
@@ -140,7 +141,13 @@ function renderTasksOfSelectedList(selectedList) {
       const label = taskElement.querySelector("label");
       label.htmlFor = task.id;
       label.append(task.name);
+
+      const deleteButton = taskElement.querySelector("span i");
+      deleteButton.dataset.deleteId = task.id;
+
       taskContainer.appendChild(taskElement);
+
+      deletingTasks();
     });
   } catch {
     console.log("No tasks to show");
@@ -165,6 +172,10 @@ function renderListOfList() {
     listTag.dataset.listId = list.id;
     listTag.dataset.listName = list.name;
 
+    //add a data atribute to delete butun
+    const deleteButton = listElement.querySelector("span i");
+    deleteButton.dataset.deleteId = list.id;
+
     //update task count from list
     const incompleteTaskCount = list.tasks.filter(task => !task.complete)
       .length;
@@ -174,6 +185,7 @@ function renderListOfList() {
 
     // add to a list container
     listContainer.appendChild(listElement);
+    deletingLists();
   });
 }
 
@@ -184,4 +196,51 @@ function clearElement(element) {
   }
 }
 
+// delete list
+
+const deletingLists = () => {
+  let deleteButtons = document
+    .querySelector("#list-of-list")
+    .querySelectorAll("i");
+
+  for (let i = 0; i < deleteButtons.length; i++) {
+    let deleteButton = deleteButtons[i];
+
+    // <li> onclick, runAlert function
+    deleteButton.onclick = deleteList;
+  }
+};
+
+function deleteList() {
+  let myList = this.getAttribute("data-delete-id");
+  lists = lists.filter(list => list.id != myList);
+  saveAndrender();
+  deletingLists();
+}
+
+//delete task
+
+const deletingTasks = () => {
+  let deleteButtons = document
+    .querySelector(".todos_from_list")
+    .querySelectorAll("i");
+
+  for (let i = 0; i < deleteButtons.length; i++) {
+    let deleteButton = deleteButtons[i];
+
+    // <li> onclick, runAlert function
+    deleteButton.onclick = deleteTask;
+  }
+};
+
+function deleteTask() {
+  let myTask = this.getAttribute("data-delete-id");
+  const selectedList = lists.find(list => list.id === selectedListId);
+  selectedList.tasks = selectedList.tasks.filter(task => task.id != myTask);
+  saveAndrender();
+  deletingTasks();
+}
+
 render();
+deletingLists();
+deletingTasks();
