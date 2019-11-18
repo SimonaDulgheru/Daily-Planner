@@ -143,7 +143,9 @@ const weatherApiInfoLoader = callback => {
     let long;
     let lat;
     const weatherDisplay = document.querySelector(`.weather_display`);
-
+    const weatherElementsWrapper = document.querySelector(
+      ".weather_elements_wrapper"
+    );
     let location = document.querySelector(`.location, span`);
     let temp = document.querySelector(`.temperature`);
     let tempDescription = document.querySelector(`.weather_description`);
@@ -167,35 +169,24 @@ const weatherApiInfoLoader = callback => {
             const temperature = data.main.temp;
             const celsius = Math.floor(temperature - 273.15);
             temp.textContent = `${celsius}°C`;
-            console.log(temperature);
+            weatherElementsWrapper.appendChild(temp);
+
+            //Display icon
+            iconId = data.weather[0].icon;
+            icon.innerHTML = `<img class="weather_icon_img" src = "icons/${iconId}.png" alt="Weather icon" />`;
+            weatherElementsWrapper.appendChild(icon);
 
             //Display temperature description
             tempDescription.textContent = data.weather[0].main;
-            console.log(tempDescription);
             weatherDisplay.appendChild(tempDescription);
 
-            //update background image accordingly
-            // const bodyBackground = document.querySelector("body");
-            const urlWeatherParameter = tempDescription.innerText;
-
-            // bodyBackground.style.backgroundImage = `url(https://source.unsplash.com/random/720×960/?${urlWeatherParameter})`;
-            callback(urlWeatherParameter);
             //Display location
             location.textContent = data.name;
             weatherDisplay.appendChild(location);
 
-            //Display icon
-            // let image = document.createElement(`img`);
-            iconId = data.weather[0].icon;
-            // icon.setAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`);
-            // icon.getAttribute(`src`, `<img src = "./icons/${iconId}.png"/>`) ;
-
-            // iconId.textContent = icon;
-            icon.innerHTML = `<img src = "icons/${iconId}.png"/>`;
-
-            weatherDisplay.appendChild(icon);
-
-            console.log(icon);
+            //update background image accordingly
+            const urlWeatherParameter = tempDescription.innerText;
+            callback(urlWeatherParameter);
           });
       });
     }
