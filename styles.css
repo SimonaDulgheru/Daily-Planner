@@ -9,6 +9,15 @@ html {
   height: 100vh;
 }
 
+body {
+  background-image: url(https://source.unsplash.com/random/720×960/?wait);
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  overflow: hidden !important;
+}
+
 .header {
   padding: 1.2em 1em;
   display: flex;
@@ -118,15 +127,6 @@ html {
   background-color: white;
 }
 
-body {
-  background-image: url(https://source.unsplash.com/random/720×960/?wait);
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  background-repeat: no-repeat;
-  overflow: hidden !important;
-}
-
 /* INTRO SECTION */
 
 .intro {
@@ -164,14 +164,24 @@ body {
   border-radius: 8px;
 }
 
+.weather_elements_wrapper {
+  display: flex;
+  flex-direction: row;
+}
 .temperature {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 1.4em;
   font-weight: 100;
+  line-height: 2em;
   color: white;
   right: 0.5em;
   margin-left: 5px;
+}
+
+.weather_icon_img {
+  width: 2.6em;
+  margin-left: 16px;
 }
 
 .weather_description {
@@ -180,15 +190,7 @@ body {
   font-size: 1.2em;
   font-weight: 100;
   color: white;
-  margin-top: 0.5em;
-  text-align: center;
-}
-
-.weather_icon img {
-  right: 1.5em;
-  position: absolute;
-  top: 0.1em;
-  width: 2.4em;
+  text-align: left;
 }
 
 .location {
@@ -199,7 +201,7 @@ body {
   font-weight: 100;
   color: white;
   margin-top: 0.5em;
-  text-align: center;
+  text-align: left;
 }
 
 .location_item {
