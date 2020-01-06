@@ -1,9 +1,16 @@
 # My Daily Planner
 
-This project is a team effort to build a web app that provides a very usefull fully customizable to-do list, together with a map to find places or adresses within the current displayed map and also to get information about the current weather at the user current location.
+This project is a web app that provides a very usefull fully customizable to-do list, together with a map to find places or adresses within the current displayed map and also to get information about the current weather at the user current location.
+
+## Includes:
+
+•	Dynamically changing background image depending on the weather condition using server-side API (Unsplash).
+•	Weather forecast at current user location using server-side API (Open Weather).
+•	Displaying different greeting depending on the time of day.
+•	To-do List and List of Tasks where the users organize their day.
+•	Google Places API, which provides user’s ability to search places, addresses or coordinates with autocomplete functionality.
 
 
-In this readme file, I will also describe the technologies and aproaches taken while developing this project.
 
 ## Preview
 
